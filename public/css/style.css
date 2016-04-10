@@ -1,0 +1,5 @@
+.navbar { background-color:#00FFFF; }
+
+.navbar a { color: #00BFFF; }
+
+ul.nav a:hover { background-color: #fff !important; }

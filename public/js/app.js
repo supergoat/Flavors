@@ -1,2 +1,2 @@
 // public/js/app.js
-angular.module('boilerplateApp', ['ngRoute', 'appRoutes', 'MainCtrl']);
+angular.module('flavors', ['ui.router', 'appRoutes', 'MainCtrl']);
