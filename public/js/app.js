@@ -1,2 +1,2 @@
 // public/js/app.js
-angular.module('flavors', ['ui.router', 'appRoutes', 'MainCtrl']);
+angular.module('flavors', ['ui.router', 'appRoutes', 'MainCtrl', 'AuthCtrl', 'NavCtrl','authService']);

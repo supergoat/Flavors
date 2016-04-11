@@ -2,22 +2,24 @@
 var express = require('express'),
 	mongoose = require('mongoose'),
 	bodyParser = require('body-parser'),
-	methodOverride = require('method-override');
+	methodOverride = require('method-override'),
+	passport = require('passport');
 
 var app = express();
 require('dotenv').load();
+require('./app/models/Users');
 
 
 // ******** CONFIGURATION ********
 // config files
 var db = require('./config/db');
+require('./config/passport');
 
 //set port
 var port = process.env.PORT || 8080;
 
 //connect to mongoDB database
-/// enter credentials in config/db.js
-// mongoose.connect(db.url);
+mongoose.connect(db.url);
 
 //get all data of the body (POST) paramaters
 // parse application/json
@@ -30,6 +32,7 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 
 // set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/public')); 
+app.use(passport.initialize());
 
 // ******** ROUTES ********
 require('./app/routes')(app); // configure our routes

@@ -1,4 +1,6 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope) {
+(function(){
+	angular.module('MainCtrl', []).controller('MainController', function($scope) {
   
 
-});
+	});
+})();

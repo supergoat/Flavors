@@ -4,9 +4,32 @@
 	$stateProvider
 		.state('home', {
 			url: '/',
-			templateUrl: '/home.html',
+			templateUrl: 'views/home.html',
 			controller: 'MainController',
 		})
-    $urlRouterProvider.otherwise('home');
+
+		.state('login', {
+			url: '/login',
+			templateUrl: 'views/login.html',
+			controller: 'AuthController',
+			onEnter: ['$state', 'auth', function($state, auth){
+				if(auth.isLoggedIn()){
+					$state.go('home');
+				}
+			}]
+		})
+
+		.state('register', {
+			url: '/register',
+			templateUrl: 'views/register.html',
+			controller: 'AuthController',
+			onEnter: ['$state', 'auth', function($state, auth){
+				if(auth.isLoggedIn()){
+					$state.go('home');
+				}
+			}]
+		})
+
+    $urlRouterProvider.otherwise('/');
 
 }]);
