@@ -21,6 +21,11 @@
           $window.location.reload();
         }
 
+        friendsList.cancelFriendRequest = function(userId){
+          friendsFactory.cancelFriendRequest(userId);
+          $window.location.reload();
+        }
+
         friendsList.deleteFriend = function(friendId){
           friendsFactory.deleteFriend(friendId);
           $window.location.reload();

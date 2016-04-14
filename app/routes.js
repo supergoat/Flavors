@@ -123,6 +123,26 @@ module.exports = function(app) {
        })
     });
 
+    app.post('/api/users/cancel-friend-request', auth, function(req, res, next){
+      var currentUserId = req.payload._id;
+      var userId = req.body.userId;
+    
+      // find friend and remove currentUser from pendingRequests
+      User
+       .findOne({"_id": userId, "pendingRequests": currentUserId}, function(err, user){
+         if(err) { res.error(err) };
+         user.pendingRequests.pull(currentUserId)
+         user.save();
+       })
+      
+      // find currentUser and remove friend from requestsSend
+      User
+       .findOne({"_id": currentUserId, "requestsSend": userId}, function(err, user){
+        if(err) { res.error(err) };
+          user.requestsSend.pull(userId)
+          user.save();
+       })
+    });
 
     app.post('/api/users/delete-friend', auth, function(req, res, next){
       var currentUserId = req.payload._id;

@@ -2,7 +2,7 @@
 <ul class="list-unstyled" ng-repeat=" friendRequest in friendsList.friendRequests">
 	<li class="inline">
 		<strong>{{friendRequest.username}}</strong>
-		<a class="inline btn btn-success" ng-click="friendsList.acceptFriendRequest(friendRequest._id)">Accept</a>
+		<a class="btn btn-success" ng-click="friendsList.acceptFriendRequest(friendRequest._id)">Accept</a>
 	</li>
 </ul>
 
@@ -10,11 +10,14 @@
 <ul class="list-unstyled" ng-repeat=" user in friendsList.users">
 	<li class="inline" ng-hide="friendsList.haveRequest(user._id) || friendsList.isFriend(user._id)">
 		<strong>{{user.username}}</strong>
-		<a class="inline btn btn-primary" ng-click="friendsList.sendFriendRequest(user._id)" ng-hide="friendsList.isPending(user.pendingRequests) || friendsList.haveRequest(user._id)">
+		<a class="btn btn-primary" ng-click="friendsList.sendFriendRequest(user._id)" ng-hide="friendsList.isPending(user.pendingRequests) || friendsList.haveRequest(user._id)">
 			Add Friend
 		</a>
-		<a class="inline btn btn-primary" ng-show="friendsList.isPending(user.pendingRequests)">
+		<a class="btn btn-primary" ng-show="friendsList.isPending(user.pendingRequests)">
 			Friend Request Sent
+		</a>
+		<a class="btn btn-danger" ng-click="friendsList.cancelFriendRequest(user._id)" ng-show="friendsList.isPending(user.pendingRequests)">
+			Cancel
 		</a>
 	</li>
 </ul>
@@ -24,7 +27,7 @@
 	<li class="inline">
 		<a class="btn btn-default" href="#/{{friend.username}}" role="button"><strong>{{friend.username}}</strong>
 		</a>
-		<a class="inline btn btn-danger" ng-click="friendsList.deleteFriend(friend._id)">
+		<a class="btn btn-danger" ng-click="friendsList.deleteFriend(friend._id)">
 			Delete
 		</a>
 	</li>

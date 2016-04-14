@@ -48,6 +48,15 @@ angular.module('friendsService', []).factory('friendsFactory',
 			})
 		}
 
+		factory.cancelFriendRequest = function(userId){
+			request = {
+				userId: userId
+			}
+			return $http.post('/api/users/cancel-friend-request', request, {
+				headers: {Authorization: 'Bearer '+auth.getToken()}
+			})
+		}
+
 		factory.deleteFriend = function(friendId){
 			request = {
 				friendId: friendId
