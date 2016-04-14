@@ -1,5 +1,10 @@
-<!-- public/views/home.html -->
-
-<div class="jumbotron text-center">
-    <h1>Home Page 4 Life</h1>
+<div class="container">
+	<div class="jumbotron text-center" ng-controller="NavController" ng-show="isLoggedIn()">
+	    <h1>Welcome To Flavors</h1>
+	    <ul class="list-unstyled">
+	    	<h2></h2>
+			<li ng-hide="isLoggedIn()"><a href="/#/login">Log In</a></li>
+	    	<li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
+		</ul>
+	</div>
 </div>

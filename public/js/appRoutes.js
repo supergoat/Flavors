@@ -5,7 +5,7 @@
 		.state('home', {
 			url: '/',
 			templateUrl: 'views/home.html',
-			controller: 'MainController',
+			controller: 'MainController'
 		})
 
 		.state('login', {
@@ -29,6 +29,33 @@
 				}
 			}]
 		})
+
+		.state('find-friends', {
+			url: '/find-friends',
+			templateUrl: 'views/find-friends.html',
+			controller: 'FindFriendsController as friendsList',
+			resolve: {
+				friendsPromise: ['friendsFactory', function(friendsFactory){
+					friendsFactory.getUsers();
+					friendsFactory.getFriends();
+					return friendsFactory.getFriendRequests();
+				}]
+			}
+		})
+
+		.state('friend-requests', {
+			url:'/friend-requests',
+			templateUrl: 'views/friend-requests.html',
+			controller: 'FindFriendsController as friendsList'
+		})
+
+		.state('profile', {
+			url: '/{userprofile}',
+			templateUrl: 'views/profile.html',
+			controller: 'ProfileController'
+		});
+
+
 
     $urlRouterProvider.otherwise('/');
 

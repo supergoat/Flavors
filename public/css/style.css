@@ -1,5 +1,52 @@
 .navbar { background-color:#00FFFF; }
 
-.navbar a { color: #00BFFF; }
+body {
+	background-color: #F0F8FF;
+}
 
-ul.nav a:hover { background-color: #fff !important; }
+body a { color: #00BFFF; }
+
+/*prevent nav wrapping*/
+ul.nav li { display: inline-block;}
+
+ul.nav a:hover { background-color: #fff !important; border-radius: 5px;}
+
+ul.nav a:focus {
+	background-color: #fff !important; border-radius: 5px;
+}
+
+/* prevent nav links from being right at the edge*/
+.navbar .nav.pull-right {
+    margin-right: 10px; /*set margin this way in your custom styesheet*/
+}
+
+.jumbotron { background-color:#00FFFF; color: #00BFFF;}
+
+#blue{
+	background-color:#00FFFF;
+	height: 150px;
+}
+
+#white {
+	background-color: white;
+	height: 150px;
+}
+
+#image {
+	background-color: #7FFFD4;
+	height: 150px;
+	width: 150px;
+    position: relative;
+    left: 30px;
+    top: 70px;
+}
+
+#username {
+	margin-left: 200px;
+}
+
+.inline {
+	display: inline-block;
+	margin-right: 50px;
+	margin-left: 10px;
+}

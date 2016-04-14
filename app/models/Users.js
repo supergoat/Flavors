@@ -2,10 +2,15 @@ var mongoose = require('mongoose'),
 		crypto = require('crypto'),
 		jwt = require('jsonwebtoken');
 
+
+//added request send
 var UserSchema = new mongoose.Schema({
 	username: { type: String, lowercase: true, unique: true},
 	hash: String,
-	salt: String
+	salt: String,
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  pendingRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  requestsSend: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
 
 UserSchema.methods.setPassword = function(password){
