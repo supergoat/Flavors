@@ -1,9 +1,17 @@
 var passport = require('passport'),
   	mongoose = require('mongoose'),
 	  User = mongoose.model('User'),
-	  jwt = require('express-jwt');
+	  jwt = require('express-jwt'),
+    aws = require('aws-sdk');
 
 var path = process.cwd();
+
+/*
+ * Load the S3 information from the environment variables.
+ */
+var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
+var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
+var S3_BUCKET = process.env.S3_BUCKET;
 
 // Add to any route that requires authentication
 var auth = jwt({secret: process.env.SECRET, userProperty: 'payload'});
@@ -46,6 +54,14 @@ module.exports = function(app) {
         }
       })(req, res, next);
     });
+
+    app.get('/api/current-user', auth, function(req, res, next){
+      var currentUserId = req.payload._id;
+      User.findOne({"_id": currentUserId},{"hash": 0, "salt": 0, "__v": 0}, function(err, user){
+        if(err){ return next(err); }
+        res.json(user);
+      })
+    })
 
     app.get('/api/users', auth, function(req, res, next){
       var currentUserId = req.payload._id;
@@ -164,6 +180,53 @@ module.exports = function(app) {
          user.save();
        })
     });
+
+
+    // save profile pic
+    app.post('/api/user/save-profile-pic', auth, function(req, res, next){
+        var currentUserId = req.payload._id;
+        var profilePic = req.body.profilePic;
+
+       User
+        .findOne({"_id": currentUserId}, function(err, user){
+           if(err) { res.error(err) };
+           user.profilepicture = profilePic;
+           user.save();
+         })
+ 
+    });
+
+
+    /*
+     * Respond to GET requests to /sign_s3.
+     * Upon request, return JSON containing the temporarily-signed S3 request and the
+     * anticipated URL of the image.
+     */
+    app.get('/sign_s3', function(req, res){
+        aws.config.update({accessKeyId: AWS_ACCESS_KEY , secretAccessKey: AWS_SECRET_KEY });
+        var s3 = new aws.S3(); 
+        var s3_params = { 
+            Bucket: S3_BUCKET, 
+            Key: req.query.file_name, 
+            Expires: 60, 
+            ContentType: req.query.file_type, 
+            ACL: 'public-read'
+        }; 
+        s3.getSignedUrl('putObject', s3_params, function(err, data){ 
+            if(err){ 
+                console.log(err); 
+            }
+            else{ 
+                var return_data = {
+                    signed_request: data,
+                    url: 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+req.query.file_name 
+                };
+                res.write(JSON.stringify(return_data));
+                res.end();
+            } 
+        });
+    });
+
 
 
 

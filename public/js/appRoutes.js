@@ -52,8 +52,13 @@
 		.state('profile', {
 			url: '/{userprofile}',
 			templateUrl: 'views/profile.html',
-			controller: 'ProfileController'
-		});
+			controller: 'ProfileController',
+			resolve: {
+				userPromise: ['currentUserFactory', function(currentUserFactory){
+					return currentUserFactory.getUser();
+				}]
+			}
+		})
 
 
 

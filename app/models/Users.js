@@ -8,6 +8,7 @@ var UserSchema = new mongoose.Schema({
 	username: { type: String, lowercase: true, unique: true},
 	hash: String,
 	salt: String,
+  profilepicture: String,
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   pendingRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   requestsSend: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
