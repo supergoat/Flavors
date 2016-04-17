@@ -8,19 +8,14 @@
 					$scope.error = 'Title is required';
 					return; 
 				}
-				$scope.flavors.push({
-					title: $scope.title, 
-					upvotes: 0,
-					comments: [
-    					{author: 'Joe', body: 'Cool post!', upvotes: 0},
-    					{author: 'Bob', body: 'Great idea but everything is wrong!', upvotes: 0}
-					]
+				flavorsFactory.create({
+					title: $scope.title
 				});
 				$scope.title = '';
-			}
+			};
 
 			$scope.incrementUpvotes = function(flavor){
-				flavor.upvotes += 1;
+				flavorsFactory.upvote(flavor);
 			}
 	}]);
 })();

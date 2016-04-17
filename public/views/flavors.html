@@ -1,9 +1,10 @@
 <h3>{{flavor.title}}</h3>
 
 <div ng-repeat="comment in flavor.comments | orderBy:'-upvotes' ">
-	<span ng-click="incrementUpvotes(comment)">^</span>
-	{{comment.upvotes}} - by {{comment.author}}
 	<span>{{comment.body}}</span>
+	<span> - by {{comment.author}}</span>
+	<span ng-click="incrementUpvotes(comment)">^</span>
+	{{comment.upvotes}} 
 </div>
 
 <div ng-show="error" class="alert alert-danger">

@@ -5,7 +5,12 @@
 		.state('home', {
 			url: '/',
 			templateUrl: 'views/home.html',
-			controller: 'MainController'
+			controller: 'MainController',
+			resolve: {
+				flavorPromise: ['flavorsFactory', function(flavorsFactory){
+					return flavorsFactory.getAll();
+				}]
+			}
 		})
 
 		.state('login', {
@@ -33,7 +38,12 @@
 		.state('flavors',{
 			url: '/flavors/{id}',
 			templateUrl: 'views/flavors.html',
-			controller: 'FlavorsController'
+			controller: 'FlavorsController',
+			resolve: {
+				flavor: ['$stateParams', 'flavorsFactory', function($stateParams, flavorsFactory){
+					return flavorsFactory.get($stateParams.id);
+				}]
+			}
 		})
 
 		.state('find-friends', {

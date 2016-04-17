@@ -1,6 +1,8 @@
 var passport = require('passport'),
   	mongoose = require('mongoose'),
 	  User = mongoose.model('User'),
+    Flavor = mongoose.model('Flavor'),
+    Comment = mongoose.model('Comment'),
 	  jwt = require('express-jwt'),
     aws = require('aws-sdk');
 
@@ -19,7 +21,7 @@ var auth = jwt({secret: process.env.SECRET, userProperty: 'payload'});
 module.exports = function(app) {
 
     // ******* SERVER ROUTES *******
-    // handle things like api calls
+
     // authentication routes
     app.post('/register', function(req, res, next){
       if(!req.body.username || !req.body.password){
@@ -55,6 +57,7 @@ module.exports = function(app) {
       })(req, res, next);
     });
 
+    // Retrieve current user
     app.get('/api/current-user', auth, function(req, res, next){
       var currentUserId = req.payload._id;
       User.findOne({"_id": currentUserId},{"hash": 0, "salt": 0, "__v": 0}, function(err, user){
@@ -63,6 +66,7 @@ module.exports = function(app) {
       })
     })
 
+    // Retrieve all users except current. Used to add friendships
     app.get('/api/users', auth, function(req, res, next){
       var currentUserId = req.payload._id;
       User.find({"_id": { $ne: currentUserId }},{"hash": 0, "salt": 0}, function(err, users){
@@ -72,6 +76,7 @@ module.exports = function(app) {
       })
     })
 
+    // Retrieve current user's friends
     app.get('/api/user/friends', auth, function(req, res, next){
       var currentUserId = req.payload._id;
       User.findOne({"_id": currentUserId },{"hash": 0, "salt": 0, "requestsSend": 0, "_id":0, "username": 0, "__v": 0, "pendingRequests": 0})
@@ -83,6 +88,7 @@ module.exports = function(app) {
       })
     })
 
+    // Retrieve current user's friend requests
     app.get('/api/user/friend-requests', auth, function(req, res, next){
       var currentUserId = req.payload._id;
       User.findOne({"_id": currentUserId },{"hash": 0, "salt": 0, "requestsSend": 0, "_id":0, "username": 0, "__v": 0, "friends": 0})
@@ -94,6 +100,8 @@ module.exports = function(app) {
       })
     })
 
+
+    // Send a friend request
     app.post('/api/users/send-friend-request', auth, function(req, res, next){
       var currentUserId = req.payload._id;
       console.log(currentUserId);
@@ -116,6 +124,8 @@ module.exports = function(app) {
        })
     });
 
+
+    // Accept friend request
     app.post('/api/users/accept-friend-request', auth, function(req, res, next){
       var currentUserId = req.payload._id;
       var userId = req.body.userId;
@@ -139,6 +149,7 @@ module.exports = function(app) {
        })
     });
 
+    // Cancel send friend request
     app.post('/api/users/cancel-friend-request', auth, function(req, res, next){
       var currentUserId = req.payload._id;
       var userId = req.body.userId;
@@ -160,6 +171,7 @@ module.exports = function(app) {
        })
     });
 
+    // Delete a friend
     app.post('/api/users/delete-friend', auth, function(req, res, next){
       var currentUserId = req.payload._id;
       var friendId = req.body.friendId;
@@ -181,7 +193,6 @@ module.exports = function(app) {
        })
     });
 
-
     // save profile pic
     app.post('/api/user/save-profile-pic', auth, function(req, res, next){
         var currentUserId = req.payload._id;
@@ -193,9 +204,99 @@ module.exports = function(app) {
            user.profilepicture = profilePic;
            user.save();
          })
- 
     });
 
+    // Retrieve all flavors
+    app.get('/api/flavors', function(req, res, next){
+      Flavor.find(function(err, flavors){
+        if(err){ return next(err); }
+
+        res.json(flavors);
+      })
+    })
+
+    // Create new flavor
+    app.post('/api/flavors', function(req, res, next){
+      var flavor = new Flavor(req.body);
+
+      flavor.save(function(err, flavor){
+        if(err){ return next(err); }
+
+        res.json(flavor);
+      });
+    });
+
+    // Retrieve flavor
+    app.get('/api/flavors/:flavor', function(req, res){
+      req.flavor.populate('comments', function(err, flavor){
+        if(err) { return next(err); }
+        
+        res.json(req.flavor);
+      });
+    });
+
+    // Upvote flavor
+    app.put('/api/flavors/:flavor/upvote', function(req, res, next){
+      req.flavor.upvote(function(err, flavor){
+        if(err){ return next(err); }
+
+        res.json(flavor);
+      });
+    });
+
+    // Post new comment
+    app.post('/api/flavors/:flavor/comments', function(req, res, next){
+      var comment = new Comment(req.body);
+      comment.flavor = req.flavor;
+
+      comment.save(function(err, comment){
+        if(err){ return next(err); }
+
+        req.flavor.comments.push(comment);
+        req.flavor.save(function(err, flavor){
+          if(err){ return next(err); }
+
+          res.json(comment);
+        });
+      });
+    });
+
+
+    // Upvote comment
+    app.put('/api/flavors/:flavor/comments/:comment/upvote', function(req, res, next){
+      req.comment.upvote(function(err, comment){
+        if (err) { return next(err); }
+
+        res.json(comment);
+      });
+    });
+
+
+    // Use Express's param() function to automatically load an object
+    // for routes that have :flavor as a param
+    app.param('flavor', function(req, res, next, id){
+      var query = Flavor.findById(id);
+
+      query.exec(function(err, flavor){
+        if (err) { return next(err); }
+        if(!flavor) { return next(new Error('can\'t find flavor')); }
+
+        req.flavor = flavor;
+        return next();
+      })
+    })
+
+    app.param('comment', function(req, res, next, id){
+      var query = Comment.findById(id);
+
+      query.exec(function(err, comment){
+        if(err) { return next(err); }
+        if(!comment) { return next(new Error('can\'t find comment')); }
+
+        req.comment = comment;
+        return next();
+      })
+    })
 
     /*
      * Respond to GET requests to /sign_s3.

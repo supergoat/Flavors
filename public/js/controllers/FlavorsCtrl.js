@@ -1,24 +1,25 @@
 (function(){
 	angular.module('FlavorsCtrl', []).controller('FlavorsController',
-		['$scope', '$stateParams','flavorsFactory', function($scope, $stateParams, flavorsFactory) {
+		['$scope','flavorsFactory','flavor', function($scope, flavorsFactory, flavor) {
  		
- 			$scope.flavor = flavorsFactory.flavors[$stateParams.id]
+ 			$scope.flavor = flavor;
 
  			$scope.addComment = function(){
  				if($scope.body === '') {
 					$scope.error = 'Comment cannot be blank';
 					return; 
  				}
- 				$scope.flavor.comments.push({
+ 				flavorsFactory.addComment(flavor._id,{
  					body: $scope.body,
  					author: 'user',
- 					upvotes: 0
+ 				}).success(function(comment){
+ 					$scope.flavor.comments.push(comment);
  				});
  				$scope.body = '';
- 			}
+ 			};
 
  			$scope.incrementUpvotes = function(comment){
-				comment.upvotes += 1;
+				flavorsFactory.upvoteComment(flavor, comment);
 			}
 	}]);
 })();

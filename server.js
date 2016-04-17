@@ -8,6 +8,8 @@ var express = require('express'),
 var app = express();
 require('dotenv').load();
 require('./app/models/Users');
+require('./app/models/Flavors');
+require('./app/models/Comment');
 
 
 // ******** CONFIGURATION ********

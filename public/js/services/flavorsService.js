@@ -4,5 +4,41 @@ angular.module('flavorsService', []).factory('flavorsFactory',
 			flavors: []
 		};
 
+		factory.getAll = function(){
+			return $http.get('/api/flavors').success(function(data){
+				angular.copy(data, factory.flavors);
+			});
+		};
+
+		factory.get = function(id){
+			return $http.get('/api/flavors/' + id).then(function(res){
+				return res.data;
+			})
+		}
+
+		factory.create = function(flavor){
+			return $http.post('/api/flavors', flavor).success(function(data){
+				factory.flavors.push(data);
+			})
+		}
+
+		factory.upvote = function(flavor){
+			return $http.put('/api/flavors/' + flavor._id + '/upvote')
+				.success(function(data){
+					flavor.upvotes += 1;
+				});
+		}
+
+		factory.addComment = function(id, comment){
+			return $http.post('/api/flavors/' + id + '/comments', comment);
+		};
+
+		factory.upvoteComment = function(flavor, comment){
+			return $http.put('/api/flavors/' + flavor._id + '/comments/' + comment._id + '/upvote')
+				.success(function(data){
+					comment.upvotes += 1;
+				});
+		};
+
 		return factory;
 }])
