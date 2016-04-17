@@ -8,3 +8,19 @@
 		</ul>
 	</div>
 </div>
+
+<div ng-show="error" class="alert alert-danger">
+	<span>{{ error }}</span>
+</div>
+
+<form ng-submit='addFlavor()'>
+	<input type="text" ng-model="title"></input>
+	<button class="btn btn-primary"type="submit">Add Flavor</button>
+</form>
+
+<div ng-repeat="flavor in flavors">
+	<span ng-click="incrementUpvotes(flavor)">^</span>
+	{{flavor.title}} - upvotes: {{flavor.upvotes}}
+	<a href="#/flavors/{{$index}}">Comments</a>
+</div>
+

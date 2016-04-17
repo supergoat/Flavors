@@ -30,6 +30,12 @@
 			}]
 		})
 
+		.state('flavors',{
+			url: '/flavors/{id}',
+			templateUrl: 'views/flavors.html',
+			controller: 'FlavorsController'
+		})
+
 		.state('find-friends', {
 			url: '/find-friends',
 			templateUrl: 'views/find-friends.html',

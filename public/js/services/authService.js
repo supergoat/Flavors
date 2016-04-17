@@ -54,7 +54,7 @@ angular.module('authService', []).factory('auth',
 
 		auth.logOut = function(){
 			$window.localStorage.removeItem('flavors-token');
-			$window.location.href='/#/login';
+			$window.location.href='/';
 		}
 
 		return auth;

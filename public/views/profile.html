@@ -5,11 +5,11 @@
 				<a href="#" onclick="document.getElementById('file_input').click(); return false;" />
 					<div id="hoverpic">Upload Picture</div>
 				</a>
-				<a ng-href="#">
+				<a ng-href="{{user.profilepicture}}">
 					<img id="preview" src="/images/default.png" ng-hide='user.profilepicture'/>
-					<img id="preview" ng-src="{{user.profilepicture}}"/>
-					<input type="file" id="file_input" style="visibility: hidden;"/>
+					<img id="preview" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture'/>		
 				</a>
+				<input type="file" id="file_input" style="visibility: hidden;"/>
 			</div>
 			<h2 id="username">{{user.username}}</h2>
 		</div>

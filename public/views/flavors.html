@@ -1,0 +1,19 @@
+<h3>{{flavor.title}}</h3>
+
+<div ng-repeat="comment in flavor.comments | orderBy:'-upvotes' ">
+	<span ng-click="incrementUpvotes(comment)">^</span>
+	{{comment.upvotes}} - by {{comment.author}}
+	<span>{{comment.body}}</span>
+</div>
+
+<div ng-show="error" class="alert alert-danger">
+	<span>{{ error }}</span>
+</div>
+
+<form ng-submit="addComment()">
+	<h3>Add new Comment</h3>
+	<div class="form-group">
+		<textarea class="form-control" placeholder="Add new comment" ng-model="body"></textarea>
+	</div>
+	<button type="submit" class="btn btn-primary">Post Comment</button>
+</form>

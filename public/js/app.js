@@ -1,2 +1,2 @@
 // public/js/app.js
-angular.module('flavors', ['ui.router', 'appRoutes', 'MainCtrl', 'AuthCtrl', 'NavCtrl', 'ProfileCtrl', 'FindFriendsCtrl', 'friendsService', 'currentUserService','authService']);
+angular.module('flavors', ['ui.router', 'appRoutes', 'MainCtrl', 'AuthCtrl', 'NavCtrl', 'ProfileCtrl', 'FindFriendsCtrl', 'FlavorsCtrl', 'flavorsService', 'friendsService', 'currentUserService','authService']);
