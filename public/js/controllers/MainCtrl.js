@@ -1,6 +1,7 @@
 (function(){
 	angular.module('MainCtrl', []).controller('MainController',
-		['$scope', 'flavorsFactory', function($scope, flavorsFactory) {
+		['$scope', 'flavorsFactory', 'auth', function($scope, flavorsFactory, auth) {
+  			$scope.isLoggedIn = auth.isLoggedIn
   			$scope.flavors = flavorsFactory.flavors;
 
 			$scope.addFlavor = function(){

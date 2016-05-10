@@ -9,7 +9,7 @@
 					<img id="preview" src="/images/default.png" ng-hide='user.profilepicture'/>
 					<img id="preview" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture'/>		
 				</a>
-				<input type="file" id="file_input" style="visibility: hidden;"/>
+				<input type="file" id="file_input" style="visibility: hidden;" onchange="angular.element(this).scope().init_upload()"/>
 			</div>
 			<h2 id="username">{{user.username}}</h2>
 		</div>

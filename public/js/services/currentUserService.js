@@ -12,5 +12,14 @@ angular.module('currentUserService', []).factory('currentUserFactory',
 			});
 		}
 
+		factory.uploadProfilePicture = function(imageUrl){
+	  		request = {
+				profilePic: imageUrl 
+			}
+			return $http.post('/api/user/save-profile-pic', request, {
+				headers: {Authorization: 'Bearer '+auth.getToken()}
+			})
+		}
+
 		return factory;
 }])
