@@ -2,7 +2,7 @@
 
 <div ng-repeat="comment in flavor.comments | orderBy:'-upvotes' ">
 	<span>{{comment.body}}</span>
-	<span> - by {{comment.author}}</span>
+	<span> - by <a>{{comment.author}}</a> </span>
 	<span ng-click="incrementUpvotes(comment)">^</span>
 	{{comment.upvotes}} 
 </div>

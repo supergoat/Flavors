@@ -21,8 +21,11 @@
 
 	<div ng-repeat="flavor in flavors">
 		<span ng-click="incrementUpvotes(flavor)">^</span>
-		{{flavor.title}} - upvotes: {{flavor.upvotes}}
-		<a href="#/flavors/{{flavor._id}}">Comments</a>
+		<a href="#/flavors/{{flavor._id}}">{{flavor.title}} - </a>
+		<span ng-show="flavor.author">
+			posted by <a>{{flavor.author}}</a> |
+		</span> 
+		upvotes: {{flavor.upvotes}}
 	</div>
 
 </div>

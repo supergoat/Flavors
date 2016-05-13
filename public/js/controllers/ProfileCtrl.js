@@ -8,6 +8,7 @@
   		$scope.init_upload = function(){
   			fileUploadFactory.init_upload().then(function(data){
   				currentUserFactory.uploadProfilePicture(data);
+          $scope.user.profilepicture = data;
   			}).catch(function(err){
 			    	console.error('Augh, there was an error!', err.statusText);
 			});

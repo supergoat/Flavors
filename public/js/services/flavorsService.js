@@ -17,27 +17,33 @@ angular.module('flavorsService', []).factory('flavorsFactory',
 		}
 
 		factory.create = function(flavor){
-			return $http.post('/api/flavors', flavor).success(function(data){
+			return $http.post('/api/flavors', flavor, {
+				headers: {Authorization: 'Bearer '+auth.getToken()}
+			}).success(function(data){
 				factory.flavors.push(data);
 			})
 		}
 
 		factory.upvote = function(flavor){
-			return $http.put('/api/flavors/' + flavor._id + '/upvote')
-				.success(function(data){
-					flavor.upvotes += 1;
-				});
+			return $http.put('/api/flavors/' + flavor._id + '/upvote', null, {
+				headers: {Authorization: 'Bearer '+auth.getToken()}
+			}).success(function(data){
+				flavor.upvotes += 1;
+			});
 		}
 
 		factory.addComment = function(id, comment){
-			return $http.post('/api/flavors/' + id + '/comments', comment);
+			return $http.post('/api/flavors/' + id + '/comments', comment, {
+				headers: {Authorization: 'Bearer '+auth.getToken()}
+			});
 		};
 
 		factory.upvoteComment = function(flavor, comment){
-			return $http.put('/api/flavors/' + flavor._id + '/comments/' + comment._id + '/upvote')
-				.success(function(data){
-					comment.upvotes += 1;
-				});
+			return $http.put('/api/flavors/' + flavor._id + '/comments/' + comment._id + '/upvote', null, {
+				headers: {Authorization: 'Bearer '+auth.getToken()}
+			}).success(function(data){
+				comment.upvotes += 1;
+			});
 		};
 
 		return factory;

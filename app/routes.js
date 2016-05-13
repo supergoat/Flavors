@@ -216,8 +216,9 @@ module.exports = function(app) {
     })
 
     // Create new flavor
-    app.post('/api/flavors', function(req, res, next){
+    app.post('/api/flavors', auth, function(req, res, next){
       var flavor = new Flavor(req.body);
+      flavor.author = req.payload.username;
 
       flavor.save(function(err, flavor){
         if(err){ return next(err); }
@@ -236,7 +237,7 @@ module.exports = function(app) {
     });
 
     // Upvote flavor
-    app.put('/api/flavors/:flavor/upvote', function(req, res, next){
+    app.put('/api/flavors/:flavor/upvote', auth, function(req, res, next){
       req.flavor.upvote(function(err, flavor){
         if(err){ return next(err); }
 
@@ -245,9 +246,10 @@ module.exports = function(app) {
     });
 
     // Post new comment
-    app.post('/api/flavors/:flavor/comments', function(req, res, next){
+    app.post('/api/flavors/:flavor/comments', auth, function(req, res, next){
       var comment = new Comment(req.body);
       comment.flavor = req.flavor;
+      comment.author = req.payload.username;
 
       comment.save(function(err, comment){
         if(err){ return next(err); }
@@ -263,7 +265,7 @@ module.exports = function(app) {
 
 
     // Upvote comment
-    app.put('/api/flavors/:flavor/comments/:comment/upvote', function(req, res, next){
+    app.put('/api/flavors/:flavor/comments/:comment/upvote', auth, function(req, res, next){
       req.comment.upvote(function(err, comment){
         if (err) { return next(err); }
 
