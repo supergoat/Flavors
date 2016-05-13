@@ -10,8 +10,7 @@
 					return; 
  				}
  				flavorsFactory.addComment(flavor._id,{
- 					body: $scope.body,
- 					author: 'user',
+ 					body: $scope.body
  				}).success(function(comment){
  					$scope.flavor.comments.push(comment);
  				});

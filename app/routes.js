@@ -219,10 +219,11 @@ module.exports = function(app) {
     app.post('/api/flavors', auth, function(req, res, next){
       var flavor = new Flavor(req.body);
       flavor.author = req.payload.username;
+      flavor.authorProfilePicture = req.payload.profilepicture;
 
       flavor.save(function(err, flavor){
         if(err){ return next(err); }
-
+        
         res.json(flavor);
       });
     });

@@ -20,12 +20,13 @@
 	</form>
 
 	<div ng-repeat="flavor in flavors">
-		<span ng-click="incrementUpvotes(flavor)">^</span>
-		<a href="#/flavors/{{flavor._id}}">{{flavor.title}} - </a>
+		<img id="profilePic" ng-src="{{flavor.authorProfilePicture}}" ng-hide='!flavor.authorProfilePicture' alt='{{flavor.author}}'/>
 		<span ng-show="flavor.author">
-			posted by <a>{{flavor.author}}</a> |
-		</span> 
-		upvotes: {{flavor.upvotes}}
+			<a>{{flavor.author}}</a>
+		</span>
+		<br>
+		<span ng-click="incrementUpvotes(flavor)">^</span> {{flavor.upvotes}}
+		<a href="#/flavors/{{flavor._id}}">{{flavor.title}}</a>
 	</div>
 
 </div>
