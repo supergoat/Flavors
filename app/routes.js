@@ -80,7 +80,7 @@ module.exports = function(app) {
     app.get('/api/user/friends', auth, function(req, res, next){
       var currentUserId = req.payload._id;
       User.findOne({"_id": currentUserId },{"hash": 0, "salt": 0, "requestsSend": 0, "_id":0, "username": 0, "__v": 0, "pendingRequests": 0})
-        .populate("friends", "_id username")
+        .populate("friends", "_id username profilepicture")
         .exec(function(err, user){
           if(err){ return next(err); }
 

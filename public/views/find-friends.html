@@ -28,8 +28,12 @@
 <h2> Friends </h2>
 <ul class="list-unstyled" ng-repeat=" friend in friendsList.friends">
 	<li class="inline">
-		<a class="btn btn-default" href="#/{{friend.username}}" role="button"><strong>{{friend.username}}</strong>
-		</a>
+<!-- 		<a class="btn btn-default" href="#/{{friend.username}}" role="button"><strong>{{friend.username}}</strong>
+		</a> -->
+		<img class="profilePic" ng-src="{{friend.profilepicture}}" ng-hide='!friend.profilepicture' alt='{{friend.username}}'/>
+		<span ng-show="friend.username">
+			<a>{{friend.username}}</a>
+		</span>
 		<a class="btn btn-danger" ng-click="friendsList.deleteFriend(friend._id)">
 			Delete
 		</a>
