@@ -9,7 +9,10 @@
 <h2> Find Friends </h2>
 <ul class="list-unstyled" ng-repeat=" user in friendsList.users">
 	<li class="inline" ng-hide="friendsList.haveRequest(user._id) || friendsList.isFriend(user._id)">
-		<strong>{{user.username}}</strong>
+		<img class="profilePic" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture' alt='{{user.username}}'/>
+		<span ng-show="user.username">
+			<a>{{user.username}}</a>
+		</span>
 		<a class="btn btn-primary" ng-click="friendsList.sendFriendRequest(user._id)" ng-hide="friendsList.isPending(user.pendingRequests) || friendsList.haveRequest(user._id)">
 			Add Friend
 		</a>

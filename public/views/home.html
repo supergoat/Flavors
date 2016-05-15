@@ -20,7 +20,7 @@
 	</form>
 
 	<div ng-repeat="flavor in flavors">
-		<img id="profilePic" ng-src="{{flavor.authorProfilePicture}}" ng-hide='!flavor.authorProfilePicture' alt='{{flavor.author}}'/>
+		<img class="profilePic" ng-src="{{flavor.authorProfilePicture}}" ng-hide='!flavor.authorProfilePicture' alt='{{flavor.author}}'/>
 		<span ng-show="flavor.author">
 			<a>{{flavor.author}}</a>
 		</span>
