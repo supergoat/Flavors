@@ -1,7 +1,10 @@
 <h2> Friend Requests</h2>
 <ul class="list-unstyled" ng-repeat=" friendRequest in friendsList.friendRequests">
 	<li class="inline">
-		<strong>{{friendRequest.username}}</strong>
+		<img class="profilePic" ng-src="{{friendRequest.profilepicture}}" ng-hide='!friendRequest.profilepicture' alt='{{friendRequest.username}}'/>
+		<span ng-show="friendRequest.username">
+			<a>{{friendRequest.username}}</a>
+		</span>
 		<a class="btn btn-success" ng-click="friendsList.acceptFriendRequest(friendRequest._id)">Accept</a>
 	</li>
 </ul>
