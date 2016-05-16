@@ -1,8 +1,9 @@
 <h3>{{flavor.title}}</h3>
 
 <div ng-repeat="comment in flavor.comments | orderBy:'-upvotes' ">
+	<img class="profilePic" ng-src="{{comment.authorProfilePicture}}" ng-hide='!comment.authorProfilePicture' alt='{{comment.author}}'/>
+	<span><a>{{comment.author}}</a> </span>
 	<span>{{comment.body}}</span>
-	<span> - by <a>{{comment.author}}</a> </span>
 	<span ng-click="incrementUpvotes(comment)">^</span>
 	{{comment.upvotes}} 
 </div>

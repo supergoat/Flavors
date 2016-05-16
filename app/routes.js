@@ -262,6 +262,7 @@ module.exports = function(app) {
       var comment = new Comment(req.body);
       comment.flavor = req.flavor;
       comment.author = req.payload.username;
+      comment.authorProfilePicture = req.payload.profilepicture;
 
       comment.save(function(err, comment){
         if(err){ return next(err); }
@@ -278,11 +279,22 @@ module.exports = function(app) {
 
     // Upvote comment
     app.put('/api/flavors/:flavor/comments/:comment/upvote', auth, function(req, res, next){
-      req.comment.upvote(function(err, comment){
-        if (err) { return next(err); }
 
-        res.json(comment);
-      });
+      upvotedBy = req.payload.username;
+      upvotedByIndex = req.comment.upvotesBy.indexOf(upvotedBy);
+      if( upvotedByIndex === -1){
+        req.comment.upvote(upvotedBy, function(err, comment){
+          if(err){ return next(err); }
+
+          res.json(comment);
+        });
+      } else {
+        req.comment.downvote(upvotedByIndex, function(err, comment){
+          if(err){ return next(err); }
+
+          res.json(comment);
+        });
+      }
     });
 
 
