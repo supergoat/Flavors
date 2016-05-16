@@ -28,7 +28,8 @@ angular.module('flavorsService', []).factory('flavorsFactory',
 			return $http.put('/api/flavors/' + flavor._id + '/upvote', null, {
 				headers: {Authorization: 'Bearer '+auth.getToken()}
 			}).success(function(data){
-				flavor.upvotes += 1;
+				flavor.upvotes = data.upvotes;
+				flavor.upvotesBy = data.upvotesBy;
 			});
 		}
 

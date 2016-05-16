@@ -8,25 +8,39 @@
 		</ul>
 	</div>
 </div>
-<div ng-show="isLoggedIn()">
+<div class='flavors'>
+	<div ng-show="isLoggedIn()">
 
-	<div ng-show="error" class="alert alert-danger">
-		<span>{{ error }}</span>
-	</div>
+		<div ng-show="error" class="alert alert-danger">
+			<span>{{ error }}</span>
+		</div>
 
-	<form ng-submit='addFlavor()'>
-		<input type="text" ng-model="title"></input>
-		<button class="btn btn-primary"type="submit">Add Flavor</button>
-	</form>
-
-	<div ng-repeat="flavor in flavors">
-		<img class="profilePic" ng-src="{{flavor.authorProfilePicture}}" ng-hide='!flavor.authorProfilePicture' alt='{{flavor.author}}'/>
-		<span ng-show="flavor.author">
-			<a>{{flavor.author}}</a>
-		</span>
+		<form ng-submit='addFlavor()'>
+			<input type="text" ng-model="title" placeholder='Post new Flavor'></input>
+			<br>
+			<button class="btn btn-primary"type="submit">Post Flavor</button>
+		</form>
 		<br>
-		<span ng-click="incrementUpvotes(flavor)">^</span> {{flavor.upvotes}}
-		<a href="#/flavors/{{flavor._id}}">{{flavor.title}}</a>
-	</div>
 
+		<div ng-repeat="flavor in flavors">
+			<div class='flavorAuthor'>
+				<img class="profilePic" ng-src="{{flavor.authorProfilePicture}}" ng-hide='!flavor.authorProfilePicture' alt='{{flavor.author}}'/>
+				<span ng-show="flavor.author">
+					<a>{{flavor.author}}</a>
+				</span>
+			</div>
+			<div class="flavor">
+				<a href="#/flavors/{{flavor._id}}">{{flavor.title}}</a>
+				<div class='upvote'>
+					<span  ng-click="incrementUpvotes(flavor)">^</span> {{flavor.upvotes}}
+<!-- 					<span ng-repeat='upvotedBy in flavor.upvotesBy'>
+						{{upvotedBy}}
+					</span> -->
+				</div>
+			</div>
+			<br>
+		</div>
+
+
+	</div>
 </div>

@@ -2,10 +2,11 @@
 <ul class="list-unstyled" ng-repeat=" friendRequest in friendsList.friendRequests">
 	<li class="inline">
 		<img class="profilePic" ng-src="{{friendRequest.profilepicture}}" ng-hide='!friendRequest.profilepicture' alt='{{friendRequest.username}}'/>
+		<a class="btn btn-success" ng-click="friendsList.acceptFriendRequest(friendRequest._id)">Accept</a>
+		<br>
 		<span ng-show="friendRequest.username">
 			<a>{{friendRequest.username}}</a>
 		</span>
-		<a class="btn btn-success" ng-click="friendsList.acceptFriendRequest(friendRequest._id)">Accept</a>
 	</li>
 </ul>
 
@@ -13,9 +14,6 @@
 <ul class="list-unstyled" ng-repeat=" user in friendsList.users">
 	<li class="inline" ng-hide="friendsList.haveRequest(user._id) || friendsList.isFriend(user._id)">
 		<img class="profilePic" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture' alt='{{user.username}}'/>
-		<span ng-show="user.username">
-			<a>{{user.username}}</a>
-		</span>
 		<a class="btn btn-primary" ng-click="friendsList.sendFriendRequest(user._id)" ng-hide="friendsList.isPending(user.pendingRequests) || friendsList.haveRequest(user._id)">
 			Add Friend
 		</a>
@@ -25,20 +23,24 @@
 		<a class="btn btn-danger" ng-click="friendsList.cancelFriendRequest(user._id)" ng-show="friendsList.isPending(user.pendingRequests)">
 			Cancel
 		</a>
+		<br>
+		<span ng-show="user.username">
+			<a>{{user.username}}</a>
+		</span>
+
 	</li>
 </ul>
 
 <h2> Friends </h2>
 <ul class="list-unstyled" ng-repeat=" friend in friendsList.friends">
 	<li class="inline">
-<!-- 		<a class="btn btn-default" href="#/{{friend.username}}" role="button"><strong>{{friend.username}}</strong>
-		</a> -->
 		<img class="profilePic" ng-src="{{friend.profilepicture}}" ng-hide='!friend.profilepicture' alt='{{friend.username}}'/>
-		<span ng-show="friend.username">
-			<a>{{friend.username}}</a>
-		</span>
 		<a class="btn btn-danger" ng-click="friendsList.deleteFriend(friend._id)">
 			Delete
 		</a>
+		<br>
+		<span ng-show="friend.username">
+			<a>{{friend.username}}</a>
+		</span>
 	</li>
 </ul>

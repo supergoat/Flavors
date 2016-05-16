@@ -82,3 +82,20 @@ ul.nav a:focus {
 	height: 50px;
 	border-radius: 100%;
 }
+
+.flavors {
+	width: 70%;
+	margin: auto;
+}
+
+.flavorAuthor {
+	background-color: #00FFFF;
+}
+
+.flavor {
+	background-color:white; 
+}
+
+.upvote {
+	background-color: white;
+}
