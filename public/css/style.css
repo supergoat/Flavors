@@ -62,7 +62,7 @@ ul.nav a:focus {
 }
 
 
-#preview {
+.preview {
 	width: 100%;
     height: 100%
 }
@@ -93,9 +93,15 @@ ul.nav a:focus {
 }
 
 .flavor {
-	background-color:white; 
+	background-color:white;
+	border: black solid 1px;
 }
 
 .upvote {
-	background-color: lightgrey;
+	background-color: #00FFFF;
+}
+
+.flavorPicture {
+	width: 100%;
+	padding: 10px;
 }

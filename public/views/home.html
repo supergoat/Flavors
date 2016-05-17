@@ -18,26 +18,38 @@
 		<form ng-submit='addFlavor()'>
 			<textarea ng-model="title" cols='70' rows='3'placeholder='Post new Flavor'></textarea>
 			<br>
+			<a href="#" onclick="document.getElementById('file_input').click(); return false;" />
+				<div>Upload Flavor Picture</div>
+			</a>
+			<img class='preview' ng-src="{{temporaryPicture}}" ng-hide='!temporaryPicture'/>	
+			<input type="file" id="file_input" style="visibility: hidden;" onchange="angular.element(this).scope().init_upload()"/>
 			<button class="btn btn-primary"type="submit">Post Flavor</button>
 		</form>
 		<br>
 
+		
+
+
 		<div ng-repeat="flavor in flavors">
-			<div class='flavorAuthor'>
-				<img class="profilePic" ng-src="{{flavor.authorProfilePicture}}" ng-hide='!flavor.authorProfilePicture' alt='{{flavor.author}}'/>
-				<span ng-show="flavor.author">
-					<a>{{flavor.author}}</a>
-				</span>
-			</div>
 			<div class="flavor">
+				<div class='flavorAuthor'>
+					<img class="profilePic" ng-src="{{flavor.authorProfilePicture}}" ng-hide='!flavor.authorProfilePicture' alt='{{flavor.author}}'/>
+					<span ng-show="flavor.author">
+						<a>{{flavor.author}}</a>
+					</span>
+				</div>
+
 				<a href="#/flavors/{{flavor._id}}">{{flavor.title}}</a>
+				<br>
+				<img class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
 				<div class='upvote'>
-					<span  ng-click="incrementUpvotes(flavor)">^</span> {{flavor.upvotes}}
+					<span  ng-click="incrementUpvotes(flavor)">^</span> {{flavor.upvotes}} likes
 <!-- 					<span ng-repeat='upvotedBy in flavor.upvotesBy'>
 						{{upvotedBy}}
 					</span> -->
 				</div>
 			</div>
+			<br>
 			<br>
 		</div>
 

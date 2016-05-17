@@ -11,7 +11,7 @@
           $scope.user.profilepicture = data;
   			}).catch(function(err){
 			    	console.error('Augh, there was an error!', err.statusText);
-			});
+			  });
   		}
 	
 	}]);

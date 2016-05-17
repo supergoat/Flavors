@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var FlavorSchema = new mongoose.Schema({
   title: String,
+  picture: String,
   author: String,
   authorProfilePicture: String,
   upvotes: {type: Number, default: 0},

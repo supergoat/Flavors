@@ -1,5 +1,12 @@
 <h3>{{flavor.title}}</h3>
-
+<img class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
+<br>
+<form ng-submit="addComment()">
+	<textarea cols='60' placeholder="Add new comment" ng-model="body"></textarea>
+	<br>
+	<button type="submit" class="btn btn-primary">Post Comment</button>
+</form>
+<br>
 <div ng-repeat="comment in flavor.comments | orderBy:'-upvotes' ">
 	<img class="profilePic" ng-src="{{comment.authorProfilePicture}}" ng-hide='!comment.authorProfilePicture' alt='{{comment.author}}'/>
 	<span><a>{{comment.author}}</a> </span>
@@ -12,10 +19,3 @@
 	<span>{{ error }}</span>
 </div>
 
-<form ng-submit="addComment()">
-	<h3>Add new Comment</h3>
-	<div class="form-group">
-		<textarea class="form-control" placeholder="Add new comment" ng-model="body"></textarea>
-	</div>
-	<button type="submit" class="btn btn-primary">Post Comment</button>
-</form>
