@@ -67,6 +67,7 @@ angular.module('fileUploadService', []).factory('fileUploadFactory',
 			        return;
 			    }
 			    get_signed_request(file).then(function(data){
+			    	document.getElementById("file_input").value = '';
 			    	resolve(data);
 			    }).catch(function(err){
 			    	console.error('Augh, there was an error!', err.statusText);

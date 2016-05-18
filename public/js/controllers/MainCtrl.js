@@ -5,30 +5,37 @@
   			$scope.flavors = flavorsFactory.flavors;
 
 			$scope.addFlavor = function(){
-				fileUploadFactory.init_upload().then(function(data){
-          var flavorImage = data;
+
 	        if(!$scope.title || $scope.title === '') { 
 						$scope.error = 'Title is required';
 						return; 
-					} else if (flavorImage && flavorImage !== '') {
-						flavorsFactory.create({
-							title: $scope.title,
-							picture: flavorImage
+					} else if ($scope.temporaryPicture && $scope.temporaryPicture !== '') {
+						fileUploadFactory.init_upload().then(function(data){
+		          var flavorImage = data;
+							flavorsFactory.create({
+								title: $scope.title,
+								picture: flavorImage
+							});
+							$scope.title = '';
+							$scope.temporaryPicture = '';
+							flavorImage = '';
+						}).catch(function(err){
+					   	console.error('Augh, there was an error!', err.statusText);
 						});
-						$scope.title = '';
-						$scope.temporaryPicture = '';
 					} else {
 						flavorsFactory.create({
 							title: $scope.title
 						});
 						$scope.title = '';
 					}
-  			}).catch(function(err){
-			   	console.error('Augh, there was an error!', err.statusText);
-				});
 
 				
 			};
+
+			$scope.removePhoto = function(){
+				$scope.temporaryPicture = '';
+				document.getElementById("file_input").value = '';
+			}
 
 			$scope.incrementUpvotes = function(flavor){
 				flavorsFactory.upvote(flavor);
