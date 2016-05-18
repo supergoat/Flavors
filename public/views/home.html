@@ -21,8 +21,8 @@
 			<a href="#" onclick="document.getElementById('file_input').click(); return false;" />
 				<div>Upload Flavor Picture</div>
 			</a>
-			<img class='preview' ng-src="{{temporaryPicture}}" ng-hide='!temporaryPicture'/>	
-			<input type="file" id="file_input" style="visibility: hidden;" onchange="angular.element(this).scope().init_upload()"/>
+			<img class='preview' ng-src="{{temporaryPicture}}" ng-hide='!temporaryPicture'/>
+			<input type="file" id="file_input" style="visibility: hidden;" onchange="angular.element(this).scope().readURL()"/>
 			<button class="btn btn-primary"type="submit">Post Flavor</button>
 		</form>
 		<br>
@@ -30,7 +30,7 @@
 		
 
 
-		<div ng-repeat="flavor in flavors">
+		<div ng-repeat="flavor in flavors| orderBy:'-upvotes'">
 			<div class="flavor">
 				<div class='flavorAuthor'>
 					<img class="profilePic" ng-src="{{flavor.authorProfilePicture}}" ng-hide='!flavor.authorProfilePicture' alt='{{flavor.author}}'/>
@@ -49,7 +49,6 @@
 					</span> -->
 				</div>
 			</div>
-			<br>
 			<br>
 		</div>
 

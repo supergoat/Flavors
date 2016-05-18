@@ -74,5 +74,19 @@ angular.module('fileUploadService', []).factory('fileUploadFactory',
 			    });
 			});
 		}
+
+		factory.readURL = function(files, file) {
+			return new Promise(function(resolve, reject){
+	  			if (files && file) {
+	  				var reader = new FileReader();
+
+	  				reader.onload = function(e) {
+	  					resolve(e.target.result);
+	  				}
+
+	  				reader.readAsDataURL(file);
+	  			};
+	  		});
+  		}
 	return factory;
 }]);
