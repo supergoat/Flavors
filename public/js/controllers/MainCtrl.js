@@ -6,30 +6,28 @@
 
 			$scope.addFlavor = function(){
 
-	        if(!$scope.title || $scope.title === '') { 
-						$scope.error = 'Title is required';
+	        	if(!$scope.title || $scope.title === '') { 
+					$scope.error = 'Title is required';
 						return; 
-					} else if ($scope.temporaryPicture && $scope.temporaryPicture !== '') {
-						fileUploadFactory.init_upload().then(function(data){
-		          var flavorImage = data;
-							flavorsFactory.create({
-								title: $scope.title,
-								picture: flavorImage
-							});
-							$scope.title = '';
-							$scope.temporaryPicture = '';
-							flavorImage = '';
-						}).catch(function(err){
-					   	console.error('Augh, there was an error!', err.statusText);
-						});
-					} else {
+				} else if ($scope.temporaryPicture && $scope.temporaryPicture !== '') {
+					fileUploadFactory.init_upload().then(function(data){
+	          			var flavorImage = data;
 						flavorsFactory.create({
-							title: $scope.title
+							title: $scope.title,
+							picture: flavorImage
 						});
 						$scope.title = '';
-					}
-
-				
+						$scope.temporaryPicture = '';
+						flavorImage = '';
+					}).catch(function(err){
+				   	console.error('Augh, there was an error!', err.statusText);
+					});
+				} else {
+					flavorsFactory.create({
+						title: $scope.title
+					});
+					$scope.title = '';
+				}
 			};
 
 			$scope.removePhoto = function(){

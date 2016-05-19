@@ -2,14 +2,21 @@
 	<div class="row">
 		<div id="blue">
 			<div id="image">
-				<a href="javascript:myBlurFunction(1);" />
+				<a ng-hide='user.temporaryProfile' href= "#" onclick="document.getElementById('file_input').click(); return false;">
 					<div id="hoverpic">Upload Picture</div>
+				</a>
+				<a href='#' ng-hide='!user.temporaryProfile'>
+					<div id="hoverpicNew" >
+						<div class='btn btn-danger'  ng-click="removePhoto()">Cancel</div>
+						<div class='btn btn-success'  ng-click="init_upload()">Save</div>
+					</div>
 				</a>
 				<a ng-href="{{user.profilepicture}}">
 					<img class="preview" src="/images/default.png" ng-hide='user.profilepicture'/>
-					<img class="preview" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture'/>		
+					<img class="preview" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture || user.temporaryProfile'/>
+					<img class="preview" ng-src="{{user.temporaryProfile}}" ng-hide='!user.temporaryProfile'/>		
 				</a>
-				<input type="file" id="file_input" style="visibility: hidden;" onchange="angular.element(this).scope().init_upload()"/>
+				<input type="file" id="file_input" style="visibility: hidden;" onchange="angular.element(this).scope().readURL()"/>
 			</div>
 			<h2 id="username">{{user.username}}</h2>
 		</div>
@@ -17,12 +24,15 @@
 	</div>
 </div>
 
+
+<!-- 
+<a href="javascript:myBlurFunction(1);" />
 <div id="overlay">
 	<div id="popup">
 		<a href="javascript:myBlurFunction(0);">hide</a>
 		<br>
 		<a href= "#" onclick="document.getElementById('file_input').click(); return false;">Select Picture</a>
 	</div>
-</div>
+</div> -->
 
 
