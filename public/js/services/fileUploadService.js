@@ -6,23 +6,20 @@ angular.module('fileUploadService', []).factory('fileUploadFactory',
 		    Function to carry out the actual PUT request to S3 using the signed request from the app.
 		*/
 		function upload_file(file, signed_request, url){
-		    var xhr = new XMLHttpRequest();
-		    xhr.open("PUT", signed_request);
-		    xhr.setRequestHeader('x-amz-acl', 'public-read');
-		  //   xhr.onload = function() {
-		  //       if (xhr.status === 200) {
-				// 	request = {
-				// 		profilePic: url 
-				// 	}
-				// 	return $http.post('/api/user/save-profile-pic', request, {
-				// 		headers: {Authorization: 'Bearer '+auth.getToken()}
-				// 	});      
-				// }
-		  //   };
-		    xhr.onerror = function() {
-		        alert("Could not upload file."); 
-		    };
-		    xhr.send(file);
+			return new Promise(function(resolve, reject) { 
+			    var xhr = new XMLHttpRequest();
+			    xhr.open("PUT", signed_request);
+			    xhr.setRequestHeader('x-amz-acl', 'public-read');
+			    xhr.onload = function() {
+			        if (xhr.status === 200) {
+						resolve('done');   
+					}
+			    };
+			    xhr.onerror = function() {
+			        alert("Could not upload file."); 
+			    };
+			    xhr.send(file);
+			});
 		}
 
 		/*
@@ -38,8 +35,13 @@ angular.module('fileUploadService', []).factory('fileUploadFactory',
 			        if(xhr.readyState === 4){
 			            if(xhr.status === 200){
 			                var response = JSON.parse(xhr.responseText);
-			                upload_file(file, response.signed_request, response.url);
-			                resolve(response.url);
+			                upload_file(file, response.signed_request, response.url).then(function(data){
+			                	resolve(response.url);
+			                }).catch(function(err){
+			                	console.error('Augh, there was an error!', err.statusText);
+			    				reject(err.statusText);
+			                });
+			                
 			            }
 			            else {
 			                alert("Could not get signed URL.");
