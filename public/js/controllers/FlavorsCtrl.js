@@ -5,10 +5,11 @@
  			$scope.flavor = flavor;
 
  			$scope.addComment = function(){
- 				if(!$scope.title || $scope.body === '') {
+ 				if(!$scope.body || $scope.body === '') {
 					$scope.error = 'Comment cannot be blank';
 					return; 
  				}
+ 				$scope.error = '';
  				flavorsFactory.addComment(flavor._id,{
  					body: $scope.body
  				}).success(function(comment){

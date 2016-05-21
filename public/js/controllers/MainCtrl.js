@@ -16,6 +16,7 @@
 							title: $scope.title,
 							picture: flavorImage
 						});
+						$scope.error = '';
 						$scope.title = '';
 						$scope.temporaryPicture = '';
 						flavorImage = '';
@@ -26,6 +27,7 @@
 					flavorsFactory.create({
 						title: $scope.title
 					});
+					$scope.error = '';
 					$scope.title = '';
 				}
 			};
