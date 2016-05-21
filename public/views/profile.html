@@ -10,7 +10,7 @@
 					<div class='btn btn-success'  ng-click="init_upload()">Save</div>
 				</div>
 				<a ng-href="{{user.profilepicture}}">
-					<img class="preview" src="/images/default.png" ng-hide='user.profilepicture'/>
+					<img class="preview" src="/images/default.png" ng-hide='user.profilepicture || user.temporaryProfile'/>
 					<img class="preview" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture || user.temporaryProfile'/>
 					<img class="preview" ng-src="{{user.temporaryProfile}}" ng-hide='!user.temporaryProfile'/>		
 				</a>
@@ -22,6 +22,58 @@
 	</div>
 </div>
 
+<div class='flavors'>
+	<div ng-show="isLoggedIn()">
+
+
+<!-- Fix where picture gets uploaded -->
+<!-- 		<div ng-show="error" class="alert alert-danger">
+			<span>{{ error }}</span>
+		</div>
+
+		<form ng-submit='addFlavor()'>
+			<textarea ng-model="title" cols='70' rows='3'placeholder='Post new Flavor'></textarea>
+			<br>
+			<a href="#" onclick="document.getElementById('file_input').click(); return false;" />
+				<div>Upload Flavor Picture</div>
+			</a>
+			<div class="btn btn-default" ng-click="removePhoto()" ng-hide='!temporaryPicture'>X</div>
+			<img class='preview' ng-src="{{temporaryPicture}}" ng-hide='!temporaryPicture'/>
+			<input type="file" id="file_input" style="visibility: hidden;" onchange="angular.element(this).scope().readURL()"/>
+			<button class="btn btn-primary"type="submit">Post Flavor</button>
+		</form>
+		<br> -->
+
+		<div ng-repeat="flavor in flavors| orderBy:'date': true">
+			<div class="flavor">
+				<div class='flavorAuthor'>
+					<img class="profilePic" ng-src="{{flavor.authorProfilePicture}}" ng-hide='!flavor.authorProfilePicture' alt='{{flavor.author}}'/>
+					<span ng-show="flavor.author">
+						<a>{{flavor.author}}</a>
+					</span>
+					<span>
+						{{flavor.date| date: 'MMM dd, yyyy HH:mm'}}
+					</span>
+				</div>
+
+				{{flavor.title}}
+				<br>
+				<a href="#/flavors/{{flavor._id}}">
+					<img class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
+				</a>
+				<div class='upvote'>
+					<span  ng-click="incrementUpvotes(flavor)">^</span> {{flavor.upvotes}} likes
+<!-- 					<span ng-repeat='upvotedBy in flavor.upvotesBy'>
+						{{upvotedBy}}
+					</span> -->
+				</div>
+			</div>
+			<br>
+		</div>
+
+
+	</div>
+</div>
 
 <!-- 
 <a href="javascript:myBlurFunction(1);" />

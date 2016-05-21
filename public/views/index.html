@@ -51,7 +51,7 @@
     <a class="navbar-brand" href="/">Flavors</a>
     <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
     <ul class="nav navbar-nav pull-right">
-      <li ng-show="isLoggedIn()"><a href="#/{{currentUser()}}" role="button">{{ currentUser() }}</a></li>
+      <li ng-show="isLoggedIn()"><a href="#/{{currentUserId()}}" role="button">{{ currentUser() }}</a></li>
       <li ng-show="isLoggedIn()"><a href="/" role="button">Home</a></li>
       <li ng-show="isLoggedIn()"><a href="/#/find-friends" role="button">Find Friends</a></li>
       <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()" role="button">Log Out</a></li>

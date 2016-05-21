@@ -1,8 +1,10 @@
 (function(){
 	angular.module('MainCtrl', []).controller('MainController',
 		['$scope', 'flavorsFactory', 'fileUploadFactory', 'auth', function($scope, flavorsFactory, fileUploadFactory, auth) {
-  			$scope.isLoggedIn = auth.isLoggedIn
+  			$scope.isLoggedIn = auth.isLoggedIn;
   			$scope.flavors = flavorsFactory.flavors;
+
+  			var currentUserId = auth.currentUserId();
 
 			$scope.addFlavor = function(){
 
@@ -12,7 +14,7 @@
 				} else if ($scope.temporaryPicture && $scope.temporaryPicture !== '') {
 					fileUploadFactory.init_upload().then(function(data){
 	          			var flavorImage = data;
-						flavorsFactory.create({
+						flavorsFactory.create(currentUserId, {
 							title: $scope.title,
 							picture: flavorImage
 						});
@@ -24,7 +26,7 @@
 				   	console.error('Augh, there was an error!', err.statusText);
 					});
 				} else {
-					flavorsFactory.create({
+					flavorsFactory.create(currentUserId, {
 						title: $scope.title
 					});
 					$scope.error = '';

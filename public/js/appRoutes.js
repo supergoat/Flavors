@@ -8,7 +8,7 @@
 			controller: 'MainController',
 			resolve: {
 				flavorPromise: ['flavorsFactory', function(flavorsFactory){
-					return flavorsFactory.getAll();
+					return flavorsFactory.getFlavors(undefined);
 				}]
 			}
 		})
@@ -36,7 +36,7 @@
 		})
 
 		.state('flavors',{
-			url: '/flavors/{id}',
+			url: '/flavors/:id',
 			templateUrl: 'views/flavors.html',
 			controller: 'FlavorsController',
 			resolve: {
@@ -66,11 +66,12 @@
 		})
 
 		.state('profile', {
-			url: '/{userprofile}',
+			url: '/:userId',
 			templateUrl: 'views/profile.html',
 			controller: 'ProfileController',
 			resolve: {
-				userPromise: ['currentUserFactory', function(currentUserFactory){
+				userPromise: ['currentUserFactory', 'flavorsFactory', '$stateParams', function(currentUserFactory, flavorsFactory, $stateParams){
+					flavorsFactory.getFlavors($stateParams.userId);
 					return currentUserFactory.getUser();
 				}]
 			}

@@ -22,7 +22,8 @@ module.exports = function(app) {
 
     // ******* SERVER ROUTES *******
 
-    // authentication routes
+
+/***************************** authentication routes ****************************************/
     app.post('/register', function(req, res, next){
       if(!req.body.username || !req.body.password){
         return res.status(400).json({message: 'Please fill out all fields'});
@@ -57,14 +58,19 @@ module.exports = function(app) {
       })(req, res, next);
     });
 
+
+/***************************** Users ****************************************/
+
     // Retrieve current user
     app.get('/api/current-user', auth, function(req, res, next){
       var currentUserId = req.payload._id;
       User.findOne({"_id": currentUserId},{"hash": 0, "salt": 0, "__v": 0}, function(err, user){
-        if(err){ return next(err); }
-        res.json(user);
+          if(err){ return next(err); }
+
+          res.json(user);
       })
-    })
+    });
+
 
     // Retrieve all users except current. Used to add friendships
     app.get('/api/users', auth, function(req, res, next){
@@ -206,19 +212,32 @@ module.exports = function(app) {
          })
     });
 
-    // Retrieve all flavors
-    app.get('/api/flavors', function(req, res, next){
-      Flavor.find(function(err, flavors){
-        if(err){ return next(err); }
 
-        res.json(flavors);
-      })
+/***************************** Flavors ****************************************/
+    // Retrieve all flavors
+    app.get('/api/flavors/:userId?', function(req, res, next){
+      var user = req.params.userId;
+
+      if (user !== undefined) {
+        Flavor.find({user: user}, function(err, flavors){
+          if(err){ return next(err); }
+
+          res.json(flavors);
+        })
+      } else {
+        Flavor.find(function(err, flavors){
+          if(err){ return next(err); }
+
+          res.json(flavors);
+        })
+      }
     })
 
     // Create new flavor
-    app.post('/api/flavors', auth, function(req, res, next){
+    app.post('/api/:user/flavors', auth, function(req, res, next){
       var flavor = new Flavor(req.body);
       flavor.author = req.payload.username;
+      flavor.user = req.user._id;
       flavor.authorProfilePicture = req.payload.profilepicture;
       flavor.save(function(err, flavor){
         if(err){ return next(err); }
@@ -231,8 +250,8 @@ module.exports = function(app) {
     app.get('/api/flavors/:flavor', function(req, res){
       req.flavor.populate('comments', function(err, flavor){
         if(err) { return next(err); }
-        
-        res.json(req.flavor);
+
+        res.json(flavor);
       });
     });
 
@@ -298,7 +317,10 @@ module.exports = function(app) {
     });
 
 
+/***************************** Param() ****************************************/
+
     // Use Express's param() function to automatically load an object
+    
     // for routes that have :flavor as a param
     app.param('flavor', function(req, res, next, id){
       var query = Flavor.findById(id);
@@ -312,6 +334,7 @@ module.exports = function(app) {
       })
     })
 
+    // for routes that have :comment as a param
     app.param('comment', function(req, res, next, id){
       var query = Comment.findById(id);
 
@@ -323,6 +346,20 @@ module.exports = function(app) {
         return next();
       })
     })
+
+    app.param('user', function(req, res, next, id){
+      var query = User.findById(id);
+
+      query.exec(function(err, user){
+        if(err) { return next(err); }
+        if(!user) { return next(new Error('can\'t find user')); }
+
+        req.user = user;
+        return next();
+      })
+    })
+
+/***************************** Amazon S3 ****************************************/
 
     /*
      * Respond to GET requests to /sign_s3.

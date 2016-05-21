@@ -4,10 +4,17 @@ angular.module('flavorsService', []).factory('flavorsFactory',
 			flavors: []
 		};
 
-		factory.getAll = function(){
-			return $http.get('/api/flavors').success(function(data){
-				angular.copy(data, factory.flavors);
-			});
+		factory.getFlavors = function(userId){
+			if(userId !== undefined) {
+				return $http.get('/api/flavors/' + userId).success(function(data){
+					angular.copy(data, factory.flavors);
+				});
+			} else {
+				return $http.get('/api/flavors/').success(function(data){
+					angular.copy(data, factory.flavors);
+				});
+			}
+
 		};
 
 		factory.get = function(id){
@@ -16,8 +23,8 @@ angular.module('flavorsService', []).factory('flavorsFactory',
 			})
 		}
 
-		factory.create = function(flavor){
-			return $http.post('/api/flavors', flavor, {
+		factory.create = function(user, flavor){
+			return $http.post('/api/' + user + '/flavors', flavor, {
 				headers: {Authorization: 'Bearer '+auth.getToken()}
 			}).success(function(data){
 				factory.flavors.push(data);

@@ -10,6 +10,7 @@ var UserSchema = new mongoose.Schema({
 	salt: String,
   profilepicture: String,
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  flavors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Flavor' }],
   pendingRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   requestsSend: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
