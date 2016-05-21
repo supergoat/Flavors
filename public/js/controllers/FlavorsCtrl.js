@@ -5,7 +5,7 @@
  			$scope.flavor = flavor;
 
  			$scope.addComment = function(){
- 				if($scope.body === '') {
+ 				if(!$scope.title || $scope.body === '') {
 					$scope.error = 'Comment cannot be blank';
 					return; 
  				}

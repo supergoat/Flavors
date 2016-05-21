@@ -39,15 +39,15 @@
 				flavorsFactory.upvote(flavor);
 			}
 
-  		$scope.readURL = function(){
-  			var files = document.getElementById("file_input").files;
-			  var file = files[0];
+	  		$scope.readURL = function(){
+	  			var files = document.getElementById("file_input").files;
+				  var file = files[0];
 
-  			fileUploadFactory.readURL(files, file).then(function(data){
-  				$scope.temporaryPicture = data;
-  				$scope.$apply();
-  			});
-  		}
+	  			fileUploadFactory.readURL(files, file).then(function(data){
+	  				$scope.temporaryPicture = data;
+	  				$scope.$apply();
+	  			});
+	  		}
 
 
 	}]);

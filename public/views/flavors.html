@@ -1,6 +1,11 @@
 <h3>{{flavor.title}}</h3>
 <img class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
 <br>
+
+<div ng-show="error" class="alert alert-danger">
+	<span>{{ error }}</span>
+</div>
+
 <form ng-submit="addComment()">
 	<textarea cols='60' placeholder="Add new comment" ng-model="body"></textarea>
 	<br>
@@ -17,9 +22,5 @@
 	<span>{{comment.body}}</span>
 	<span ng-click="incrementUpvotes(comment)">^</span>
 	{{comment.upvotes}} 
-</div>
-
-<div ng-show="error" class="alert alert-danger">
-	<span>{{ error }}</span>
 </div>
 
