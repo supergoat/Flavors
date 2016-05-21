@@ -28,18 +28,23 @@
 		</form>
 		<br>
 
-		<div ng-repeat="flavor in flavors| orderBy:'-upvotes'">
+		<div ng-repeat="flavor in flavors| orderBy:'date': true">
 			<div class="flavor">
 				<div class='flavorAuthor'>
 					<img class="profilePic" ng-src="{{flavor.authorProfilePicture}}" ng-hide='!flavor.authorProfilePicture' alt='{{flavor.author}}'/>
 					<span ng-show="flavor.author">
 						<a>{{flavor.author}}</a>
 					</span>
+					<span>
+						{{flavor.date| date: 'MMM dd, yyyy HH:mm'}}
+					</span>
 				</div>
 
-				<a href="#/flavors/{{flavor._id}}">{{flavor.title}}</a>
+				{{flavor.title}}
 				<br>
-				<img class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
+				<a href="#/flavors/{{flavor._id}}">
+					<img class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
+				</a>
 				<div class='upvote'>
 					<span  ng-click="incrementUpvotes(flavor)">^</span> {{flavor.upvotes}} likes
 <!-- 					<span ng-repeat='upvotedBy in flavor.upvotesBy'>

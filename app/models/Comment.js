@@ -6,6 +6,7 @@ var CommentSchema = new mongoose.Schema({
 	authorProfilePicture: String,
 	upvotes: { type: Number, default: 0},
 	upvotesBy: Array,
+	date: {type: Date, default: Date.now},
 	flavor: { type: mongoose.Schema.Types.ObjectId, ref: 'Flavor'}
 });
 
