@@ -215,20 +215,24 @@ module.exports = function(app) {
 
 /***************************** Flavors ****************************************/
     // Retrieve all flavors
-    app.get('/api/flavors/:userId?', function(req, res, next){
+    app.get('/api/flavors/flavor/:userId?', function(req, res, next){
       var user = req.params.userId;
 
       if (user !== undefined) {
-        Flavor.find({user: user}, function(err, flavors){
-          if(err){ return next(err); }
+        Flavor.find({user: user})
+          .populate("user", "_id username profilepicture")
+          .exec(function(err, flavors){
+            if(err){ return next(err); }
 
-          res.json(flavors);
-        })
+            res.json(flavors);
+        });
       } else {
-        Flavor.find(function(err, flavors){
-          if(err){ return next(err); }
+        Flavor.find()
+          .populate("user", "_id username profilepicture")
+          .exec(function(err, flavors){
+            if(err){ return next(err); }
 
-          res.json(flavors);
+            res.json(flavors);
         })
       }
     })
@@ -236,22 +240,26 @@ module.exports = function(app) {
     // Create new flavor
     app.post('/api/:user/flavors', auth, function(req, res, next){
       var flavor = new Flavor(req.body);
-      flavor.author = req.payload.username;
       flavor.user = req.user._id;
-      flavor.authorProfilePicture = req.payload.profilepicture;
       flavor.save(function(err, flavor){
         if(err){ return next(err); }
         
+        req.user.flavors.push(flavor);
+        req.user.save();
         res.json(flavor);
       });
     });
 
     // Retrieve flavor
     app.get('/api/flavors/:flavor', function(req, res){
-      req.flavor.populate('comments', function(err, flavor){
-        if(err) { return next(err); }
+      var flavor = req.flavor._id;
+      Comment.find({flavor: flavor})
+        .populate("user", "_id username profilepicture")
+        .exec(function(err, comments){
+          if(err){ return next(err); }
+          req.flavor.comments = comments;
 
-        res.json(flavor);
+          res.json(req.flavor);
       });
     });
 
@@ -277,11 +285,10 @@ module.exports = function(app) {
     });
 
     // Post new comment
-    app.post('/api/flavors/:flavor/comments', auth, function(req, res, next){
+    app.post('/api/:user/flavors/:flavor/comments', auth, function(req, res, next){
       var comment = new Comment(req.body);
-      comment.flavor = req.flavor;
-      comment.author = req.payload.username;
-      comment.authorProfilePicture = req.payload.profilepicture;
+      comment.flavor = req.flavor._id;
+      comment.user = req.user;
 
       comment.save(function(err, comment){
         if(err){ return next(err); }
@@ -290,6 +297,7 @@ module.exports = function(app) {
         req.flavor.save(function(err, flavor){
           if(err){ return next(err); }
 
+          console.log(comment);
           res.json(comment);
         });
       });
@@ -348,7 +356,7 @@ module.exports = function(app) {
     })
 
     app.param('user', function(req, res, next, id){
-      var query = User.findById(id);
+      var query = User.findById(id,{"profilepicture": 1, "username": 1});
 
       query.exec(function(err, user){
         if(err) { return next(err); }

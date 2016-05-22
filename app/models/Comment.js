@@ -2,8 +2,7 @@ var mongoose = require('mongoose');
 
 var CommentSchema = new mongoose.Schema({
 	body: String,
-	author: String,
-	authorProfilePicture: String,
+	user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	upvotes: { type: Number, default: 0},
 	upvotesBy: Array,
 	date: {type: Date, default: Date.now},

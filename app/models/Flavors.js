@@ -3,9 +3,7 @@ var mongoose = require('mongoose');
 var FlavorSchema = new mongoose.Schema({
   title: String,
   picture: String,
-  author: String,
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-  authorProfilePicture: String,
   upvotes: {type: Number, default: 0},
   upvotesBy: Array,
   date: {type: Date, default: Date.now},

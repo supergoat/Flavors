@@ -14,9 +14,11 @@
 </div>
 
 <br>
+
 <div ng-repeat="comment in flavor.comments | orderBy:'date': true">
-	<img class="profilePic" ng-src="{{comment.authorProfilePicture}}" ng-hide='!comment.authorProfilePicture' alt='{{comment.author}}'/>
-	<span><a>{{comment.author}}</a> </span>
+	<br>
+	<img class="profilePic" ng-src="{{comment.user.profilepicture}}" ng-hide='!comment.user.profilepicture' alt='{{comment.user.profilepicture}}'/>
+	<span><a>{{comment.user.username}}</a> </span>
 	<span>
 		{{comment.date| date: 'MMM dd, yyyy HH:mm'}}
 	</span>

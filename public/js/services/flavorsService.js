@@ -6,11 +6,11 @@ angular.module('flavorsService', []).factory('flavorsFactory',
 
 		factory.getFlavors = function(userId){
 			if(userId !== undefined) {
-				return $http.get('/api/flavors/' + userId).success(function(data){
+				return $http.get('/api/flavors/flavor/' + userId).success(function(data){
 					angular.copy(data, factory.flavors);
 				});
 			} else {
-				return $http.get('/api/flavors/').success(function(data){
+				return $http.get('/api/flavors/flavor').success(function(data){
 					angular.copy(data, factory.flavors);
 				});
 			}
@@ -40,8 +40,8 @@ angular.module('flavorsService', []).factory('flavorsFactory',
 			});
 		}
 
-		factory.addComment = function(id, comment){
-			return $http.post('/api/flavors/' + id + '/comments', comment, {
+		factory.addComment = function(userId,flavorId, comment){
+			return $http.post('/api/' + userId + '/flavors/' + flavorId + '/comments', comment, {
 				headers: {Authorization: 'Bearer '+auth.getToken()}
 			});
 		};

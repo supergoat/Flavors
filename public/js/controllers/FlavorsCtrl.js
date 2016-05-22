@@ -4,13 +4,15 @@
  			$scope.isLoggedIn = auth.isLoggedIn
  			$scope.flavor = flavor;
 
+ 			var currentUserId = auth.currentUserId();
+
  			$scope.addComment = function(){
  				if(!$scope.body || $scope.body === '') {
 					$scope.error = 'Comment cannot be blank';
 					return; 
  				}
  				$scope.error = '';
- 				flavorsFactory.addComment(flavor._id,{
+ 				flavorsFactory.addComment(currentUserId, flavor._id,{
  					body: $scope.body
  				}).success(function(comment){
  					$scope.flavor.comments.push(comment);

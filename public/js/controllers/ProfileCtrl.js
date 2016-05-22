@@ -9,9 +9,9 @@
   		$scope.init_upload = function(){
   			fileUploadFactory.init_upload().then(function(data){
   				currentUserFactory.uploadProfilePicture(data);
-          $scope.user.profilepicture = data;
-          $scope.user.temporaryProfile = '';
-          $scope.$apply();
+          // $scope.user.profilepicture = data;
+          // $scope.user.temporaryProfile = '';
+          location.reload();
   			}).catch(function(err){
 			    	console.error('Augh, there was an error!', err.statusText);
 			  });
