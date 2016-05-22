@@ -60,9 +60,9 @@ angular.module('fileUploadService', []).factory('fileUploadFactory',
 		   Function called when file input updated. If there is a file selected, then
 		   start upload procedure by asking for a signed request from the app.
 		*/
-		factory.init_upload = function(){
+		factory.init_upload = function(inputId){
 			return new Promise(function(resolve, reject){
-			    var files = document.getElementById("file_input").files;
+			    var files = document.getElementById(inputId).files;
 			    var file = files[0];
 			    if(file == null){
 			        alert("No file selected.");

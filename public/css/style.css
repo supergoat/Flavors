@@ -102,11 +102,24 @@ ul.nav a:focus {
 	margin: auto;
 }
 
+.flavors form {
+	max-width: 70%;
+	margin: auto;
+}
+
+.flavors form textarea{
+	width: 100%;
+	height: 70px;
+	margin: auto;
+}
+
 .flavorAuthor {
 	background-color: #00FFFF;
 }
 
 .flavor {
+	max-width: 70%;
+	margin: auto;
 	background-color:white;
 	border: black solid 1px;
 }

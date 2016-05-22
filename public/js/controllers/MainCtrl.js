@@ -45,12 +45,14 @@
 
 	  		$scope.readURL = function(){
 	  			var files = document.getElementById("file_input").files;
-				  var file = files[0];
+				var file = files[0];
 
 	  			fileUploadFactory.readURL(files, file).then(function(data){
 	  				$scope.temporaryPicture = data;
 	  				$scope.$apply();
-	  			});
+	  			}).catch(function(err){
+            		console.error('Augh, there was an error!', err.statusText);
+        		});
 	  		}
 
 

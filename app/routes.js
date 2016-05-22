@@ -356,7 +356,7 @@ module.exports = function(app) {
     })
 
     app.param('user', function(req, res, next, id){
-      var query = User.findById(id,{"profilepicture": 1, "username": 1});
+      var query = User.findById(id,{"profilepicture": 1, "username": 1, "flavors": 1});
 
       query.exec(function(err, user){
         if(err) { return next(err); }
