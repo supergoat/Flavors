@@ -55,6 +55,22 @@
         		});
 	  		}
 
+ 			$scope.addComment = function(flavor){
+ 				if(!this.body || this.body === '') {
+					return; 
+ 				}
+ 				flavorsFactory.addComment(currentUserId, flavor._id,{
+ 					body: this.body
+ 				}).success(function(comment){
+ 					flavor.comments.push(comment);
+ 				});
+ 				this.body = '';
+ 			};
+
+ 			$scope.incrementCommentUpvotes = function(flavor, comment){
+				flavorsFactory.upvoteComment(flavor, comment);
+			}
+
 
 	}]);
 })();

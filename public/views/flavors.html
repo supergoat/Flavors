@@ -23,8 +23,11 @@
 		{{comment.date| date: 'MMM dd, yyyy HH:mm'}}
 	</span>
 	<br>
-	<span>{{comment.body}}</span>
-	<span ng-click="incrementUpvotes(comment)">^</span>
-	{{comment.upvotes}} 
+	<div class="commentBody">
+		<span>{{comment.body}}</span>
+		<br>
+		<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span>
+		{{comment.upvotes}} 
+	</div>
 </div>
 

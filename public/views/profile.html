@@ -60,7 +60,7 @@
 					<img class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
 				</a>
 				<div class='upvote'>
-					<span  ng-click="incrementUpvotes(flavor)">^</span> {{flavor.upvotes}} likes
+					<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(flavor)"></span> {{flavor.upvotes}} likes
 <!-- 					<span ng-repeat='upvotedBy in flavor.upvotesBy'>
 						{{upvotedBy}}
 					</span> -->

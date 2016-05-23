@@ -40,7 +40,7 @@ angular.module('flavorsService', []).factory('flavorsFactory',
 			});
 		}
 
-		factory.addComment = function(userId,flavorId, comment){
+		factory.addComment = function(userId, flavorId, comment){
 			return $http.post('/api/' + userId + '/flavors/' + flavorId + '/comments', comment, {
 				headers: {Authorization: 'Bearer '+auth.getToken()}
 			});

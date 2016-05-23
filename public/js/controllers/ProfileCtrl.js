@@ -54,6 +54,10 @@
         document.getElementById("profile_input").value = '';
       }
 
+      $scope.incrementUpvotes = function(flavor){
+        flavorsFactory.upvote(flavor);
+      }
+
       $scope.readURL = function(scope){
 
         if (scope === 'temporaryProfile') {

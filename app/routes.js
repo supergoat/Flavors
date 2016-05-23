@@ -221,6 +221,7 @@ module.exports = function(app) {
       if (user !== undefined) {
         Flavor.find({user: user})
           .populate("user", "_id username profilepicture")
+          .populate({path: "comments", populate: { path: "user", select: "_id profilepicture username" }, options: { limit: 3, sort: {_id: -1} }})
           .exec(function(err, flavors){
             if(err){ return next(err); }
 
@@ -229,6 +230,7 @@ module.exports = function(app) {
       } else {
         Flavor.find()
           .populate("user", "_id username profilepicture")
+          .populate({path: "comments", populate: { path: "user", select: "_id profilepicture username" }, options: { limit: 3, sort: {_id: -1} }})
           .exec(function(err, flavors){
             if(err){ return next(err); }
 
@@ -240,7 +242,7 @@ module.exports = function(app) {
     // Create new flavor
     app.post('/api/:user/flavors', auth, function(req, res, next){
       var flavor = new Flavor(req.body);
-      flavor.user = req.user._id;
+      flavor.user = req.user;
       flavor.save(function(err, flavor){
         if(err){ return next(err); }
         
@@ -297,7 +299,6 @@ module.exports = function(app) {
         req.flavor.save(function(err, flavor){
           if(err){ return next(err); }
 
-          console.log(comment);
           res.json(comment);
         });
       });
