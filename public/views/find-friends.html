@@ -5,7 +5,7 @@
 		<a class="btn btn-success" ng-click="friendsList.acceptFriendRequest(friendRequest._id)">Accept</a>
 		<br>
 		<span ng-show="friendRequest.username">
-			<a>{{friendRequest.username}}</a>
+			<a href='/#/profile/{{friendRequest._id}}'>{{friendRequest.username}}</a>
 		</span>
 	</li>
 </ul>
@@ -25,7 +25,7 @@
 		</a>
 		<br>
 		<span ng-show="user.username">
-			<a>{{user.username}}</a>
+			<a href='/#/profile/{{user._id}}'>{{user.username}}</a>
 		</span>
 
 	</li>
@@ -40,7 +40,7 @@
 		</a>
 		<br>
 		<span ng-show="friend.username">
-			<a>{{friend.username}}</a>
+			<a href='/#/profile/{{friend._id}}'>{{friend.username}}</a>
 		</span>
 	</li>
 </ul>

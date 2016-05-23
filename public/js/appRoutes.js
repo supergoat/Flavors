@@ -52,7 +52,7 @@
 			controller: 'FindFriendsController as friendsList',
 			resolve: {
 				friendsPromise: ['friendsFactory', function(friendsFactory){
-					friendsFactory.getUsers();
+					friendsFactory.getUsers(undefined);
 					friendsFactory.getFriends();
 					return friendsFactory.getFriendRequests();
 				}]
@@ -75,6 +75,23 @@
 					return currentUserFactory.getUser();
 				}]
 			}
+		})
+
+		.state('userprofile', {
+			url: '/profile/:userId',
+			templateUrl: 'views/userprofile.html',
+			controller: 'UserProfileController',
+			resolve: {
+				userPromise: ['friendsFactory', 'flavorsFactory', '$stateParams', function(friendsFactory, flavorsFactory, $stateParams){
+					flavorsFactory.getFlavors($stateParams.userId);
+					return friendsFactory.getUsers($stateParams.userId);
+				}]
+			},
+			onEnter: ['$stateParams','$state', 'auth', function($stateParams, $state, auth){
+				if($stateParams.userId === auth.currentUserId()){
+					$state.go('profile', {userId: auth.currentUserId()}, {reload: true});
+				}
+			}]
 		})
 
 

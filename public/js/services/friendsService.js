@@ -1,17 +1,26 @@
 angular.module('friendsService', []).factory('friendsFactory', 
 	['$http', 'auth', function($http, auth){
 		var factory = {
+			user: {},
 			users: [],
 			friends: [],
 			friendRequests: []
 		};
 
-		factory.getUsers = function(){
-			return $http.get('/api/users', {
-				headers: {Authorization: 'Bearer '+auth.getToken()}
-			}).success(function(data){
-				angular.copy(data, factory.users);
-			});
+		factory.getUsers = function(userId){
+			if(userId !== undefined) {
+				return $http.get('/api/users/' + userId, {
+					headers: {Authorization: 'Bearer '+auth.getToken()}
+				}).success(function(data){
+					factory.user = angular.copy(data[0]);
+				});
+			} else {
+				return $http.get('/api/users', {
+					headers: {Authorization: 'Bearer '+auth.getToken()}
+				}).success(function(data){
+					angular.copy(data, factory.users);
+				});
+			}
 		}
 
 		factory.getFriends = function(){

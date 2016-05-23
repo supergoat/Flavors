@@ -47,7 +47,7 @@
 				<div class='flavorAuthor'>
 					<img class="profilePic" ng-src="{{flavor.user.profilepicture}}" ng-hide='!flavor.user.profilepicture' alt='{{flavor.user.profilepicture}}'/>
 					<span ng-show="flavor.user.username">
-						<a>{{flavor.user.username}}</a>
+						<a href='/#/profile/{{flavor.user._id}}'>{{flavor.user.username}}</a>
 					</span>
 					<span>
 						{{flavor.date| date: 'MMM dd, yyyy HH:mm'}}
@@ -71,7 +71,7 @@
 				<div ng-repeat="comment in flavor.comments | orderBy:'date': true">
 					<br>
 					<img class="profilePic" ng-src="{{comment.user.profilepicture}}" ng-hide='!comment.user.profilepicture' alt='{{comment.user.profilepicture}}'/>
-					<span><a>{{comment.user.username}}</a> </span>
+					<span><a href='/#/profile/{{comment.user._id}}'>{{comment.user.username}}</a> </span>
 					<span>
 						{{comment.date| date: 'MMM dd, yyyy HH:mm'}}
 					</span>

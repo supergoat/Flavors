@@ -73,13 +73,23 @@ module.exports = function(app) {
 
 
     // Retrieve all users except current. Used to add friendships
-    app.get('/api/users', auth, function(req, res, next){
+    app.get('/api/users/:userId?', auth, function(req, res, next){
       var currentUserId = req.payload._id;
-      User.find({"_id": { $ne: currentUserId }},{"hash": 0, "salt": 0}, function(err, users){
-        if(err){ return next(err); }
+      var user = req.params.userId;
+      if(user === undefined) {
 
-        res.json(users);
-      })
+        User.find({"_id": { $ne: currentUserId }},{"hash": 0, "salt": 0}, function(err, users){
+          if(err){ return next(err); }
+
+          res.json(users);
+        })
+      } else {
+        User.find({"_id": user},{"hash": 0, "salt": 0, "pendingRequests": 0, "requestsSend": 0, "flavors": 0}, function(err, user){
+          if(err){ return next(err); }
+
+          res.json(user);
+        })
+      }
     })
 
     // Retrieve current user's friends
