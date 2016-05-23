@@ -61,10 +61,33 @@
 				</a>
 				<div class='upvote'>
 					<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(flavor)"></span> {{flavor.upvotes}} likes
+					<span>{{flavor.comments.length}} comments</span>
 <!-- 					<span ng-repeat='upvotedBy in flavor.upvotesBy'>
 						{{upvotedBy}}
 					</span> -->
 				</div>
+			</div>
+			<div class="commentsDiv">
+				<div ng-repeat="comment in flavor.comments | orderBy:'date': true">
+					<br>
+					<img class="profilePic" ng-src="{{comment.user.profilepicture}}" ng-hide='!comment.user.profilepicture' alt='{{comment.user.profilepicture}}'/>
+					<span><a>{{comment.user.username}}</a> </span>
+					<span>
+						{{comment.date| date: 'MMM dd, yyyy HH:mm'}}
+					</span>
+					<br>
+					<div class="commentBody">
+						<span>{{comment.body}}</span>
+						<br>
+						<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementCommentUpvotes(flavor, comment)"></span>
+						{{comment.upvotes}} likes
+					</div>
+				</div>
+				<form  ng-submit="addComment(flavor)">
+					<textarea id="commentBox" placeholder="Add new comment" ng-model="body"></textarea>
+					<br>
+					<button type="submit" class="btn btn-primary">Post Comment</button>
+				</form>
 			</div>
 			<br>
 		</div>

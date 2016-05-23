@@ -1,7 +1,7 @@
 (function(){
     myBlurFunction = function(state) {
         /* state can be 1 or 0 */
-        var containerElement = document.getElementById('body');
+        var containerElement = document.getElementById('main');
         var overlayEle = document.getElementById('overlay');
 
         if (state) {

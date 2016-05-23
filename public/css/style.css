@@ -130,7 +130,7 @@ ul.nav a:focus {
 }
 
 .upvote {
-	background-color: #00FFFF;
+	border-top: #00FFFF solid 1px;
 }
 
 .flavorPicture {
@@ -140,6 +140,16 @@ ul.nav a:focus {
 
 #commentBox {
 	width: 100%;
+	margin: auto;
+}
+
+.commentsDiv {
+	background-color: #E0FFFF;
+	max-width: 70%;
+	margin: auto;
+	border-bottom: black solid 1px;
+	border-right: black solid 1px;
+	border-left: black solid 1px;
 }
 
 /************* Background Blur Effect ***************/

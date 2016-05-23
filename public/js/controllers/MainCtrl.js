@@ -3,6 +3,7 @@
 		['$scope', 'flavorsFactory', 'fileUploadFactory', 'auth', function($scope, flavorsFactory, fileUploadFactory, auth) {
   			$scope.isLoggedIn = auth.isLoggedIn;
   			$scope.flavors = flavorsFactory.flavors;
+  			var toggle = false;
 
   			var currentUserId = auth.currentUserId();
 
@@ -70,6 +71,17 @@
  			$scope.incrementCommentUpvotes = function(flavor, comment){
 				flavorsFactory.upvoteComment(flavor, comment);
 			}
+
+
+ 			$scope.showComments = function(flavorId){
+ 				if(toggle === false){
+ 					$scope.flavorShowComments = flavorId;
+ 					toggle = true;
+ 				} else {
+ 					$scope.flavorShowComments = '';
+ 					toggle = false;
+ 				}
+ 			};
 
 
 	}]);
