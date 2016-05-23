@@ -225,29 +225,33 @@ module.exports = function(app) {
 
 /***************************** Flavors ****************************************/
     // Retrieve all flavors
-    app.get('/api/flavors/flavor/:userId?', function(req, res, next){
+    app.get('/api/flavors/user/:userId', function(req, res, next){
       var user = req.params.userId;
 
-      if (user !== undefined) {
-        Flavor.find({user: user})
-          .populate("user", "_id username profilepicture")
-          .populate({path: "comments", populate: { path: "user", select: "_id profilepicture username" }, options: { limit: 3, sort: {_id: -1} }})
-          .exec(function(err, flavors){
-            if(err){ return next(err); }
+      Flavor.find({user: user})
+        .populate("user", "_id username profilepicture")
+        .populate({path: "comments", populate: { path: "user", select: "_id profilepicture username" }, options: { limit: 3, sort: {_id: -1} }})
+        .exec(function(err, flavors){
+          if(err){ return next(err); }
 
-            res.json(flavors);
-        });
-      } else {
-        Flavor.find()
-          .populate("user", "_id username profilepicture")
-          .populate({path: "comments", populate: { path: "user", select: "_id profilepicture username" }, options: { limit: 3, sort: {_id: -1} }})
-          .exec(function(err, flavors){
-            if(err){ return next(err); }
-
-            res.json(flavors);
-        })
-      }
+          res.json(flavors);
+      });
     })
+
+    app.get('/api/home/flavors/user/:user', function(req, res, next){
+      var users = req.user.friends;
+      users.push(req.user._id);
+      Flavor.find( {"user": { $in: users }})
+        .populate("user", "_id username profilepicture")
+        .populate({path: "comments", populate: { path: "user", select: "_id profilepicture username" }, options: { limit: 3, sort: {_id: -1} }})
+        .exec(function(err, flavors){
+          if(err){ return next(err); }
+          res.json(flavors);
+      })
+    })
+
+
+
 
     // Create new flavor
     app.post('/api/:user/flavors', auth, function(req, res, next){
@@ -367,7 +371,7 @@ module.exports = function(app) {
     })
 
     app.param('user', function(req, res, next, id){
-      var query = User.findById(id,{"profilepicture": 1, "username": 1, "flavors": 1});
+      var query = User.findById(id,{"profilepicture": 1, "username": 1, "flavors": 1, "friends": 1});
 
       query.exec(function(err, user){
         if(err) { return next(err); }

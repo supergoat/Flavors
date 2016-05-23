@@ -8,7 +8,7 @@
 			controller: 'MainController',
 			resolve: {
 				flavorPromise: ['flavorsFactory', function(flavorsFactory){
-					return flavorsFactory.getFlavors(undefined);
+					return flavorsFactory.getFlavors();
 				}]
 			}
 		})
@@ -71,7 +71,7 @@
 			controller: 'ProfileController',
 			resolve: {
 				userPromise: ['currentUserFactory', 'flavorsFactory', '$stateParams', function(currentUserFactory, flavorsFactory, $stateParams){
-					flavorsFactory.getFlavors($stateParams.userId);
+					flavorsFactory.getUserFlavors($stateParams.userId);
 					return currentUserFactory.getUser();
 				}]
 			}
@@ -83,7 +83,7 @@
 			controller: 'UserProfileController',
 			resolve: {
 				userPromise: ['friendsFactory', 'flavorsFactory', '$stateParams', function(friendsFactory, flavorsFactory, $stateParams){
-					flavorsFactory.getFlavors($stateParams.userId);
+					flavorsFactory.getUserFlavors($stateParams.userId);
 					return friendsFactory.getUsers($stateParams.userId);
 				}]
 			},

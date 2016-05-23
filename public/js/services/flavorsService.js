@@ -4,17 +4,23 @@ angular.module('flavorsService', []).factory('flavorsFactory',
 			flavors: []
 		};
 
-		factory.getFlavors = function(userId){
-			if(userId !== undefined) {
-				return $http.get('/api/flavors/flavor/' + userId).success(function(data){
-					angular.copy(data, factory.flavors);
-				});
-			} else {
-				return $http.get('/api/flavors/flavor').success(function(data){
-					angular.copy(data, factory.flavors);
-				});
+		factory.getUserFlavors = function(userId){
+			if(userId === undefined) {
+				return;
 			}
+			return $http.get('/api/flavors/user/' + userId).success(function(data){
+				angular.copy(data, factory.flavors);
+			});
+		};
 
+		factory.getFlavors = function(){
+			var userId = auth.currentUserId();
+			if(userId === undefined) {
+				return;
+			}
+			return $http.get('/api/home/flavors/user/' + userId).success(function(data){
+				angular.copy(data, factory.flavors);
+			});
 		};
 
 		factory.get = function(id){

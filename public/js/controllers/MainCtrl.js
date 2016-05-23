@@ -13,7 +13,7 @@
 					$scope.error = 'Title is required';
 						return; 
 				} else if ($scope.temporaryPicture && $scope.temporaryPicture !== '') {
-					fileUploadFactory.init_upload().then(function(data){
+					fileUploadFactory.init_upload('file_input').then(function(data){
 	          			var flavorImage = data;
 						flavorsFactory.create(currentUserId, {
 							title: $scope.title,
