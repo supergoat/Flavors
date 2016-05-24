@@ -66,6 +66,7 @@
 		})
 
 		.state('profile', {
+			abstract: true,
 			url: '/:userId',
 			templateUrl: 'views/profile.html',
 			controller: 'ProfileController',
@@ -73,6 +74,23 @@
 				userPromise: ['currentUserFactory', 'flavorsFactory', '$stateParams', function(currentUserFactory, flavorsFactory, $stateParams){
 					flavorsFactory.getUserFlavors($stateParams.userId);
 					return currentUserFactory.getUser();
+				}]
+			}
+		})
+
+		.state('profile.home', {
+			url: '',
+			templateUrl: 'views/profile.home.html',
+			controller: 'ProfileController'
+		})
+
+		.state('profile.friends', {
+			url: '',
+			templateUrl: 'views/profile.friends.html',
+			controller: 'ProfileController',
+			resolve: {
+				userFriendsPromise: ['friendsFactory', function(friendsFactory){
+					return friendsFactory.getFriends();
 				}]
 			}
 		})
@@ -89,7 +107,7 @@
 			},
 			onEnter: ['$stateParams','$state', 'auth', function($stateParams, $state, auth){
 				if($stateParams.userId === auth.currentUserId()){
-					$state.go('profile', {userId: auth.currentUserId()}, {reload: true});
+					$state.go('profile.home', {userId: auth.currentUserId()}, {reload: true});
 				}
 			}]
 		})
@@ -97,5 +115,6 @@
 
 
     $urlRouterProvider.otherwise('/');
+    // $urlRouterProvider.when("/:userId", "/:userId/");
 
 }]);

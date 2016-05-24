@@ -1,10 +1,11 @@
 (function(){
 	angular.module('ProfileCtrl', []).controller('ProfileController', 
-		['$scope', 'auth', 'currentUserFactory', 'fileUploadFactory', 'flavorsFactory', function($scope, auth, currentUserFactory, fileUploadFactory, flavorsFactory) {
+		['$scope', 'auth', 'currentUserFactory', 'fileUploadFactory', 'flavorsFactory', 'friendsFactory', function($scope, auth, currentUserFactory, fileUploadFactory, flavorsFactory, friendsFactory) {
 
   		$scope.isLoggedIn = auth.isLoggedIn
   		$scope.user = currentUserFactory.user;
       $scope.flavors = flavorsFactory.flavors;
+      $scope.friends = friendsFactory.friends;
 
       var currentUserId = auth.currentUserId();
 

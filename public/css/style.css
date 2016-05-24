@@ -152,6 +152,11 @@ ul.nav a:focus {
 	border-left: black solid 1px;
 }
 
+#white .profileNav {
+	background-color: #E0FFFF;
+	height: 35px;
+}
+
 /************* Background Blur Effect ***************/
 .blur   {
     filter: blur(5px);

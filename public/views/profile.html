@@ -18,83 +18,22 @@
 			</div>
 			<h2 id="username">{{user.username}}</h2>
 		</div>
-		<div id="white"></div>
+		<div id="white">
+			<div class="profileNav">
+				<div class="col-sm-6"></div>
+				<div class="col-sm-2">
+					<a ui-sref="profile.home" class="btn btn-primary" role="button">Flavors</a>
+				</div>
+				<div class="col-sm-2">
+					<a ui-sref="profile.friends" class="btn btn-primary" role="button">Friends</a>
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+		</div>
 	</div>
 </div>
 <br>
-<div class='flavors'>
-	<div ng-show="isLoggedIn()">
-
-		<div ng-show="error" class="alert alert-danger">
-			<span>{{ error }}</span>
-		</div>
-
-		<form ng-submit='addFlavor()'>
-			<textarea ng-model="title" placeholder='Post new Flavor'></textarea>
-			<br>
-			<a href="#" onclick="document.getElementById('file_input').click(); return false;" />
-				<div>Upload Flavor Picture</div>
-			</a>
-			<div class="btn btn-default" ng-click="removePhoto()" ng-hide='!temporaryPicture'>X</div>
-			<img class='preview' ng-src="{{temporaryPicture}}" ng-hide='!temporaryPicture'/>
-			<input type="file" id="file_input" style="visibility: hidden;" onchange="angular.element(this).scope().readURL('temporaryPicture')"/>
-			<button class="btn btn-primary"type="submit">Post Flavor</button>
-		</form>
-		<br>
-
-		<div ng-repeat="flavor in flavors| orderBy:'date': true">
-			<div class="flavor">
-				<div class='flavorAuthor'>
-					<img class="profilePic" ng-src="{{flavor.user.profilepicture}}" ng-hide='!flavor.user.profilepicture' alt='{{flavor.user.profilepicture}}'/>
-					<span ng-show="flavor.user.username">
-						<a href='/#/profile/{{flavor.user._id}}'>{{flavor.user.username}}</a>
-					</span>
-					<span>
-						{{flavor.date| date: 'MMM dd, yyyy HH:mm'}}
-					</span>
-				</div>
-
-				{{flavor.title}}
-				<br>
-				<a href="#/flavors/{{flavor._id}}">
-					<img class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
-				</a>
-				<div class='upvote'>
-					<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(flavor)"></span> {{flavor.upvotes}} likes
-					<span>{{flavor.comments.length}} comments</span>
-<!-- 					<span ng-repeat='upvotedBy in flavor.upvotesBy'>
-						{{upvotedBy}}
-					</span> -->
-				</div>
-			</div>
-			<div class="commentsDiv">
-				<div ng-repeat="comment in flavor.comments | orderBy:'date': true">
-					<br>
-					<img class="profilePic" ng-src="{{comment.user.profilepicture}}" ng-hide='!comment.user.profilepicture' alt='{{comment.user.profilepicture}}'/>
-					<span><a href='/#/profile/{{comment.user._id}}'>{{comment.user.username}}</a> </span>
-					<span>
-						{{comment.date| date: 'MMM dd, yyyy HH:mm'}}
-					</span>
-					<br>
-					<div class="commentBody">
-						<span>{{comment.body}}</span>
-						<br>
-						<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementCommentUpvotes(flavor, comment)"></span>
-						{{comment.upvotes}} likes
-					</div>
-				</div>
-				<form  ng-submit="addComment(flavor)">
-					<textarea id="commentBox" placeholder="Add new comment" ng-model="body"></textarea>
-					<br>
-					<button type="submit" class="btn btn-primary">Post Comment</button>
-				</form>
-			</div>
-			<br>
-		</div>
-
-
-	</div>
-</div>
+<div ui-view></div>
 
 <!-- 
 <a href="javascript:myBlurFunction(1);" />
