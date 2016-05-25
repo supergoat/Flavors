@@ -65,10 +65,8 @@
 					</div>
 					<div class="addCommentDiv">
 						<img class="profilePicComment" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture' alt='{{user.profilepicture}}'/>
-						<form  ng-submit="addComment(flavor)">
+						<form  enter-submit="addComment(flavor)">
 							<textarea id="commentBox" placeholder="Add new comment" ng-model="body"></textarea>
-							<br>
-							<button type="submit" class="btn btn-primary">Post Comment</button>
 						</form>
 					</div>
 				</div>

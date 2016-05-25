@@ -2,6 +2,7 @@
 
 body {
 	background-color: #F0F8FF;
+	padding-top: 70px; 
 }
 
 body a { color: #00BFFF; }
@@ -160,8 +161,9 @@ ul.nav a:focus {
 }
 
 .upvote {
+	margin-right: 10px;
+	margin-left: 10px;
 	border-top: #7FFFD4 solid 1px;
-	border-bottom: #7FFFD4 solid 1px;
 }
 
 .flavorPicture {
@@ -175,6 +177,7 @@ ul.nav a:focus {
 }
 
 .commentDiv {
+	border-top: #7FFFD4 solid 1px;
 	background-color: #F8F8FF;
 	padding: 10px;
 }
