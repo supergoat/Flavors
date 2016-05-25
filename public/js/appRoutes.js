@@ -7,7 +7,8 @@
 			templateUrl: 'views/home.html',
 			controller: 'MainController',
 			resolve: {
-				flavorPromise: ['flavorsFactory', function(flavorsFactory){
+				flavorPromise: ['currentUserFactory', 'flavorsFactory', function(currentUserFactory, flavorsFactory){
+					currentUserFactory.getUser();
 					return flavorsFactory.getFlavors();
 				}]
 			}

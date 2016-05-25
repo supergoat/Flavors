@@ -1,8 +1,9 @@
 (function(){
 	angular.module('MainCtrl', []).controller('MainController',
-		['$scope', 'flavorsFactory', 'fileUploadFactory', 'auth', function($scope, flavorsFactory, fileUploadFactory, auth) {
+		['$scope', 'currentUserFactory', 'flavorsFactory', 'fileUploadFactory', 'auth', function($scope, currentUserFactory, flavorsFactory, fileUploadFactory, auth) {
   			$scope.isLoggedIn = auth.isLoggedIn;
   			$scope.flavors = flavorsFactory.flavors;
+  			$scope.user = currentUserFactory.user;
   			var toggle = false;
 
   			var currentUserId = auth.currentUserId();

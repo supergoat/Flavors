@@ -15,32 +15,38 @@
 			<span>{{ error }}</span>
 		</div>
 
-		<form ng-submit='addFlavor()'>
-			<textarea id="flavorBox" ng-model="title" placeholder='Post new Flavor'></textarea>
+		<form class="addFlavor" ng-submit='addFlavor()'>
+			<img class="profilePicFlavor" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture' alt='{{user.profilepicture}}'/>
+			<textarea ng-model="title" placeholder='Post new Flavor'></textarea>
 			<br>
 			<a href="#" onclick="document.getElementById('file_input').click(); return false;" />
-				<div>Upload Flavor Picture</div>
+				<div class="uploadPicture">Upload Flavor Picture</div>
 			</a>
 			<div class="btn btn-default" ng-click="removePhoto()" ng-hide='!temporaryPicture'>X</div>
 			<img class='preview' ng-src="{{temporaryPicture}}" ng-hide='!temporaryPicture'/>
 			<input type="file" id="file_input" style="visibility: hidden;" onchange="angular.element(this).scope().readURL()"/>
-			<button class="btn btn-primary"type="submit">Post Flavor</button>
+			<div class="postFlavor">
+				<button class="btn btn-primary"type="submit">Post Flavor</button>
+			</div>
 		</form>
 		<br>
 
 		<div ng-repeat="flavor in flavors| orderBy:'date': true">
 			<div class="flavor">
-				<div class='flavorAuthor'>
-					<img class="profilePic" ng-src="{{flavor.user.profilepicture}}" ng-hide='!flavor.user.profilepicture' alt='{{flavor.user.profilepicture}}'/>
+				<div>
+					<img class="profilePicFlavor" ng-src="{{flavor.user.profilepicture}}" ng-hide='!flavor.user.profilepicture' alt='{{flavor.user.profilepicture}}'/>
 					<span ng-show="flavor.user.username">
 						<a href='/#/profile/{{flavor.user._id}}'>{{flavor.user.username}}</a>
 					</span>
+					<br>
 					<span>
 						{{flavor.date| date: 'MMM dd, yyyy HH:mm'}}
 					</span>
 				</div>
-
-				{{flavor.title}}
+				<br>
+				<div class="flavorText">
+					{{flavor.title}}
+				</div>
 				<br>
 				<a href="#/flavors/{{flavor._id}}">
 					<img class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
@@ -52,28 +58,31 @@
 						{{upvotedBy}}
 					</span> -->
 				</div>
-			</div>
-			<div class="commentsDiv" ng-hide='!flavorShowComments || flavorShowComments !== flavor._id'>
-				<div ng-repeat="comment in flavor.comments | orderBy:'date': true">
-					<br>
-					<img class="profilePic" ng-src="{{comment.user.profilepicture}}" ng-hide='!comment.user.profilepicture' alt='{{comment.user.profilepicture}}'/>
-					<span><a href='/#/profile/{{comment.user._id}}'>{{comment.user.username}}</a> </span>
-					<span>
-						{{comment.date| date: 'MMM dd, yyyy HH:mm'}}
-					</span>
-					<br>
-					<div class="commentBody">
-						<span>{{comment.body}}</span>
+				<div class="commentDiv" ng-hide='!flavorShowComments || flavorShowComments !== flavor._id'>
+					<div ng-repeat="comment in flavor.comments | orderBy:'date': true">
 						<br>
-						<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementCommentUpvotes(flavor, comment)"></span>
-						{{comment.upvotes}} likes
+						<img class="profilePic" ng-src="{{comment.user.profilepicture}}" ng-hide='!comment.user.profilepicture' alt='{{comment.user.profilepicture}}'/>
+						<span><a href='/#/profile/{{comment.user._id}}'>{{comment.user.username}}</a> </span>
+						<span>
+							{{comment.date| date: 'MMM dd, yyyy HH:mm'}}
+						</span>
+						<br>
+						<div class="commentBody">
+							<span>{{comment.body}}</span>
+							<br>
+							<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementCommentUpvotes(flavor, comment)"></span>
+							{{comment.upvotes}} likes
+						</div>
+					</div>
+					<div class="addCommentDiv">
+						<img class="profilePicComment" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture' alt='{{user.profilepicture}}'/>
+						<form  ng-submit="addComment(flavor)">
+							<textarea id="commentBox" placeholder="Add new comment" ng-model="body"></textarea>
+							<br>
+							<button type="submit" class="btn btn-primary">Post Comment</button>
+						</form>
 					</div>
 				</div>
-				<form  ng-submit="addComment(flavor)">
-					<textarea id="commentBox" placeholder="Add new comment" ng-model="body"></textarea>
-					<br>
-					<button type="submit" class="btn btn-primary">Post Comment</button>
-				</form>
 			</div>
 			<br>
 		</div>

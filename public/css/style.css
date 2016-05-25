@@ -75,10 +75,10 @@ ul.nav a:focus {
     top: 95px;
 }
 
-
 .preview {
 	width: 100%;
-    height: 100%
+    height: 100%;
+    margin-bottom: 10px;
 }
 
 #username {
@@ -98,6 +98,22 @@ ul.nav a:focus {
 	border-radius: 100%;
 }
 
+.profilePicComment{
+	margin-right: 5px;
+	width: 25px;
+	height: 25px;
+	border-radius: 100%;
+ 	float: left;
+}
+
+.profilePicFlavor {
+	float: left;
+	padding: 5px;
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+}
+
 .commentBody {
 	margin-left: 30px;
 }
@@ -107,30 +123,45 @@ ul.nav a:focus {
 	margin: auto;
 }
 
-.flavors form {
-	max-width: 70%;
+.flavors .addFlavor {
+	padding: 5px;
+	border: #7FFFD4 solid 2px;
+	width: 70%;
 	margin: auto;
+	border-radius: 5px;
+	background-color: white;
 }
-
-#flavorBox {
-	width: 100%;
-	height: 70px;
-	margin: auto;
-}
-
-.flavorAuthor {
-	background-color: #00FFFF;
+.flavors .addFlavor textarea{
+	width: 80%;
 }
 
 .flavor {
-	max-width: 70%;
+	width: 70%;
 	margin: auto;
 	background-color:white;
-	border: black solid 1px;
+	border: #7FFFD4 solid 1px;
+	border-radius: 5px;
+}
+
+.flavorText {
+	margin-left: 10px;
+	margin-bottom: 5px;
+}
+
+.uploadPicture{
+	margin-left: 50px;
+}
+
+.postFlavor {
+	margin-left: 50px;
+	width: 80%;
+	text-align: right;
+	margin-top: -20px;
 }
 
 .upvote {
-	border-top: #00FFFF solid 1px;
+	border-top: #7FFFD4 solid 1px;
+	border-bottom: #7FFFD4 solid 1px;
 }
 
 .flavorPicture {
@@ -139,18 +170,19 @@ ul.nav a:focus {
 }
 
 #commentBox {
-	width: 100%;
-	margin: auto;
+	width: 90%;
+	height: 30px;
 }
 
-.commentsDiv {
-	background-color: #E0FFFF;
-	max-width: 70%;
-	margin: auto;
-	border-bottom: black solid 1px;
-	border-right: black solid 1px;
-	border-left: black solid 1px;
+.commentDiv {
+	background-color: #F8F8FF;
+	padding: 10px;
 }
+
+.addCommentDiv {
+	padding-top: 5px;
+}
+
 
 #white .profileNav {
 	background-color: #E0FFFF;
