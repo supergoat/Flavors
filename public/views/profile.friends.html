@@ -1,14 +1,16 @@
 <div class="container">
-	<h1>Friends</h1>
-	<br>
-	<ul class="img-list" ng-repeat="friend in friends">
-		<li>
-			<img class="friendPic" ng-src="{{friend.profilepicture}}" ng-hide='!friend.profilepicture' alt='{{friend.username}}'/>
-			<span class="friends">
-				<a class="btn btn-default" href="#/profile/{{friend._id}}">{{friend.username}}</a>
-				<br>
-				<a class="btn btn-danger" ng-click="friendsList.deleteFriend(friend._id)">Delete</a>
-			</span>
-		</li>
-	</ul>
+	<div class="allFriends">
+		<h1>Friends</h1>
+		<br>
+		<ul class="img-list" ng-repeat="friend in friends">
+			<li>
+				<img class="friendPic" ng-src="{{friend.profilepicture}}" ng-hide='!friend.profilepicture' alt='{{friend.username}}'/>
+				<span class="friends">
+					<a class="btn btn-default" href="#/profile/{{friend._id}}">{{friend.username}}</a>
+					<br>
+					<a class="btn btn-danger" ng-click="friendsList.deleteFriend(friend._id)">Delete</a>
+				</span>
+			</li>
+		</ul>
+	</div>
 </div>

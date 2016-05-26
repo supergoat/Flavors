@@ -125,7 +125,7 @@ ul.nav a:focus {
 }
 
 .flavors .addFlavor {
-	padding: 5px;
+	padding: 15px;
 	border: #7FFFD4 solid 2px;
 	width: 70%;
 	margin: auto;
@@ -257,12 +257,6 @@ span.friends {
   transition: opacity 400ms;
 }
 
-/*span.friends span {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-}*/
-
 ul.img-list li:hover span.friends {
   opacity: 1;
 }
@@ -324,6 +318,25 @@ span.text-content {
   transition: opacity 400ms;
 }
 
+.friendRequests ul.img-list li{
+	margin-bottom: -70px;
+}
+
+.findFriends {
+	clear: left;
+}
+
+.findFriends ul.img-list li{
+	margin-bottom: -70px;
+}
+
+.allFriends {
+	clear: left;
+}
+
+.allFriends ul.img-list li{
+	margin-bottom: -70px;
+}
 
 
 
