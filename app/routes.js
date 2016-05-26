@@ -72,7 +72,7 @@ module.exports = function(app) {
     });
 
 
-    // Retrieve all users except current. Used to add friendships
+    // Retrieve all users except current. Used to add friendships. OR retrieve specific user
     app.get('/api/users/:userId?', auth, function(req, res, next){
       var currentUserId = req.payload._id;
       var user = req.params.userId;
@@ -92,16 +92,27 @@ module.exports = function(app) {
       }
     })
 
-    // Retrieve current user's friends
-    app.get('/api/user/friends', auth, function(req, res, next){
+    // Retrieve user's friends
+    app.get('/api/user/friends/:userId?', auth, function(req, res, next){
       var currentUserId = req.payload._id;
-      User.findOne({"_id": currentUserId },{"hash": 0, "salt": 0, "requestsSend": 0, "_id":0, "username": 0, "__v": 0, "pendingRequests": 0})
-        .populate("friends", "_id username profilepicture")
-        .exec(function(err, user){
-          if(err){ return next(err); }
+      var user = req.params.userId;
+      if(user === undefined) {
+        User.findOne({"_id": currentUserId },{"hash": 0, "salt": 0, "requestsSend": 0, "_id":0, "username": 0, "__v": 0, "pendingRequests": 0})
+          .populate("friends", "_id username profilepicture")
+          .exec(function(err, user){
+            if(err){ return next(err); }
 
-          res.json(user.friends);
-      })
+            res.json(user.friends);
+        })
+      } else {
+        User.findOne({"_id": user },{"hash": 0, "salt": 0, "requestsSend": 0, "_id":0, "username": 0, "__v": 0, "pendingRequests": 0})
+          .populate("friends", "_id username profilepicture")
+          .exec(function(err, user){
+            if(err){ return next(err); }
+
+            res.json(user.friends);
+        })
+      }
     })
 
     // Retrieve current user's friend requests

@@ -1,0 +1,12 @@
+<div class="container userFlavors">
+	<h1>Flavors</h1>
+	<br>
+	<ul class="img-list" ng-repeat="flavor in flavors| orderBy:'date': true">
+		<li ng-hide="!flavor.picture">
+			<a href="#/flavors/{{flavor._id}}">
+				<img class="userFlavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
+				<span class="text-content"><span>{{flavor.title}}</span></span>
+			</a>
+		</li>
+	</ul>
+</div>

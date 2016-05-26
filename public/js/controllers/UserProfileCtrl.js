@@ -4,6 +4,7 @@
 
   		$scope.isLoggedIn = auth.isLoggedIn
   		$scope.user = friendsFactory.user;
+      $scope.friends = friendsFactory.friends;
       $scope.flavors = flavorsFactory.flavors;
 
       var currentUserId = auth.currentUserId();

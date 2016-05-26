@@ -23,12 +23,20 @@ angular.module('friendsService', []).factory('friendsFactory',
 			}
 		}
 
-		factory.getFriends = function(){
-			return $http.get('/api/user/friends', {
-				headers: {Authorization: 'Bearer '+auth.getToken()}
-			}).success(function(data){
-				angular.copy(data, factory.friends);
-			});
+		factory.getFriends = function(userId){
+			if(userId === undefined) {
+				return $http.get('/api/user/friends', {
+					headers: {Authorization: 'Bearer '+auth.getToken()}
+				}).success(function(data){
+					angular.copy(data, factory.friends);
+				});
+			} else {
+				return $http.get('/api/user/friends/' +userId, {
+					headers: {Authorization: 'Bearer '+auth.getToken()}
+				}).success(function(data){
+					angular.copy(data, factory.friends);
+				});
+			}
 		}
 
 		factory.getFriendRequests = function(){

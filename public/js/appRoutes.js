@@ -99,12 +99,13 @@
 			controller: 'ProfileController',
 			resolve: {
 				userFriendsPromise: ['friendsFactory', function(friendsFactory){
-					return friendsFactory.getFriends();
+					return friendsFactory.getFriends(undefined);
 				}]
 			}
 		})
 
 		.state('userprofile', {
+			abstract: true,
 			url: '/profile/:userId',
 			templateUrl: 'views/userprofile.html',
 			controller: 'UserProfileController',
@@ -119,6 +120,29 @@
 					$state.go('profile.home', {userId: auth.currentUserId()}, {reload: true});
 				}
 			}]
+		})
+
+		.state('userprofile.home', {
+			url: '',
+			templateUrl: 'views/userprofile.home.html',
+			controller: 'UserProfileController'
+		})
+
+		.state('userprofile.friends', {
+			url: '/friends',
+			templateUrl: 'views/userprofile.friends.html',
+			controller: 'UserProfileController',
+			resolve: {
+				userPromise: ['friendsFactory', '$stateParams', function(friendsFactory, $stateParams){
+					return friendsFactory.getFriends($stateParams.userId);
+				}]
+			}
+		})
+
+		.state('userprofile.flavors', {
+			url: '/flavors',
+			templateUrl: 'views/userprofile.flavors.html',
+			controller: 'UserProfileController'
 		})
 
 

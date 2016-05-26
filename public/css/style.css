@@ -172,7 +172,7 @@ ul.nav a:focus {
 	padding: 10px;
 }
 
-#commentBox {
+.commentBox {
 	width: 90%;
 	height: 30px;
 }
@@ -247,17 +247,21 @@ span.friends {
   width: 200px;
   border-radius: 100%;
   opacity: 0;
+  text-align: center;
+  /*Center text in image*/
+  padding-top: 50px;
+  line-height: 50px;
   -webkit-transition: opacity 400ms;
   -moz-transition: opacity 400ms;
   -o-transition: opacity 400ms;
   transition: opacity 400ms;
 }
 
-span.friends span {
+/*span.friends span {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
-}
+}*/
 
 ul.img-list li:hover span.friends {
   opacity: 1;
