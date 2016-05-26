@@ -1,13 +1,14 @@
-<h2> Friends </h2>
-<ul class="list-unstyled" ng-repeat=" friend in friends">
-	<li class="inline">
-		<img class="profilePic" ng-src="{{friend.profilepicture}}" ng-hide='!friend.profilepicture' alt='{{friend.username}}'/>
-		<a class="btn btn-danger" ng-click="friendsList.deleteFriend(friend._id)">
-			Delete
-		</a>
-		<br>
-		<span ng-show="friend.username">
-			<a href='/#/profile/{{friend._id}}'>{{friend.username}}</a>
-		</span>
-	</li>
-</ul>
+<div class="container">
+	<h1>Friends</h1>
+	<br>
+	<ul class="img-list" ng-repeat="friend in friends">
+		<li>
+			<a href="#/profile/{{friend._id}}">
+				<img class="friendPic" ng-src="{{friend.profilepicture}}" ng-hide='!friend.profilepicture' alt='{{friend.username}}'/>
+				<span class="friends">
+					<span>{{friend.username}}<span>
+				</span>
+			</a>
+		</li>
+	</ul>
+</div>

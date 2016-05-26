@@ -7,11 +7,13 @@
 			templateUrl: 'views/home.html',
 			controller: 'MainController',
 			resolve: {
-				flavorPromise: ['currentUserFactory', 'flavorsFactory', function(currentUserFactory, flavorsFactory){
-					currentUserFactory.getUser();
-					return flavorsFactory.getFlavors();
+				flavorPromise: ['currentUserFactory', 'flavorsFactory', 'auth', function(currentUserFactory, flavorsFactory, auth){
+					if(auth.isLoggedIn()){
+						currentUserFactory.getUser();
+						return flavorsFactory.getFlavors();
+					}
 				}]
-			}
+			}		
 		})
 
 		.state('login', {
@@ -85,8 +87,14 @@
 			controller: 'ProfileController'
 		})
 
+		.state('profile.flavors', {
+			url: '/flavors',
+			templateUrl: 'views/profile.flavors.html',
+			controller: 'ProfileController'
+		})
+
 		.state('profile.friends', {
-			url: '',
+			url: '/friends',
 			templateUrl: 'views/profile.friends.html',
 			controller: 'ProfileController',
 			resolve: {
@@ -116,6 +124,5 @@
 
 
     $urlRouterProvider.otherwise('/');
-    // $urlRouterProvider.when("/:userId", "/:userId/");
 
 }]);

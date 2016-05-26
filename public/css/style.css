@@ -132,6 +132,7 @@ ul.nav a:focus {
 	border-radius: 5px;
 	background-color: white;
 }
+
 .flavors .addFlavor textarea{
 	width: 80%;
 }
@@ -188,8 +189,11 @@ ul.nav a:focus {
 
 
 #white .profileNav {
+	float: right;
 	background-color: #E0FFFF;
 	height: 35px;
+	width: 100%;
+	text-align: right;
 }
 
 /************* Background Blur Effect ***************/
@@ -222,5 +226,100 @@ ul.nav a:focus {
     bottom: 0px;
     margin: auto;
 }
+
+/********* Profile Friends Styling *********/
+.friendPic{
+	width: 200px;
+	height: 200px;
+	border-radius: 100%;
+
+}
+
+span.friends {
+  background: rgba(0,0,0,0.5);
+  color: white;
+  cursor: pointer;
+  display: table;
+  height: 200px;
+  left: 50px;
+  position: absolute;
+  top: 0;
+  width: 200px;
+  border-radius: 100%;
+  opacity: 0;
+  -webkit-transition: opacity 400ms;
+  -moz-transition: opacity 400ms;
+  -o-transition: opacity 400ms;
+  transition: opacity 400ms;
+}
+
+span.friends span {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+ul.img-list li:hover span.friends {
+  opacity: 1;
+}
+
+
+
+/********* Profile Flavors Styling *********/
+
+.userFlavorPicture {
+	width: 300px;
+	height: 300px;
+}
+
+.userFlavors {
+	padding-left: 4%;
+}
+
+ul.img-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  float: left;
+  text-align: center;
+}
+
+ul.img-list li {
+  display: inline-block;
+  height: 300px;
+  margin: 0 2em 2em 0;
+  position: relative;
+  width: 300px;
+}
+
+span.text-content span {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+ul.img-list li:hover span.text-content {
+  opacity: 1;
+}
+
+
+span.text-content {
+  background: rgba(0,0,0,0.5);
+  color: white;
+  cursor: pointer;
+  display: table;
+  height: 300px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 300px;
+  opacity: 0;
+  -webkit-transition: opacity 400ms;
+  -moz-transition: opacity 400ms;
+  -o-transition: opacity 400ms;
+  transition: opacity 400ms;
+}
+
+
 
 
