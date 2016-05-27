@@ -38,9 +38,7 @@
 					{{flavor.title}}
 				</div>
 				<br>
-				<a href="#/flavors/{{flavor._id}}">
-					<img class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
-				</a>
+				<img click-popup="1" class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
 				<div class='upvote'>
 					<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(flavor)"></span> {{flavor.upvotes}} likes
 					<a ng-click="showComments(flavor._id)"><span>{{flavor.comments.length}} comments</span><a>
@@ -48,6 +46,14 @@
 						{{upvotedBy}}
 					</span> -->
 				</div>
+
+				<div click-popup id="overlay">
+					<div id="popup">
+						<a click-popup>X</a>
+						<img click-popup="1" class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
+					</div>
+				</div>
+
 				<div class="commentDiv" ng-hide='!flavorShowComments || flavorShowComments !== flavor._id'>
 					<div ng-repeat="comment in flavor.comments | orderBy:'date': true">
 						<br>
@@ -67,7 +73,7 @@
 					<div class="addCommentDiv">
 						<img class="profilePicComment" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture' alt='{{user.profilepicture}}'/>
 						<form enter-submit="addComment(flavor)">
-							<textarea id="commentBox" placeholder="Add new comment" ng-model="body"></textarea>
+							<textarea class="commentBox" placeholder="Add new comment" ng-model="body"></textarea>
 						</form>
 					</div>
 				</div>
