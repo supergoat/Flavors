@@ -220,7 +220,7 @@ ul.nav a:focus {
 
 #overlay    {
     position: fixed;
-    display: none;
+/*    display: none;*/
     left: 0px;
     top: 0px;
     right: 0px;
@@ -230,10 +230,11 @@ ul.nav a:focus {
 }
 
 #popup{
+	overflow:auto;
     position: absolute;
     width: 90%;
     height: 90%;
-    background: rgba(0,0,0, 0.8);
+    background: white; /*rgba(0,0,0, 0.8);*/
     left: 0px;
     right: 0px;
     top: 0px;

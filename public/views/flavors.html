@@ -2,32 +2,4 @@
 <img class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
 <br>
 
-<div ng-show="error" class="alert alert-danger">
-	<span>{{ error }}</span>
-</div>
-<div ng-show="isLoggedIn()">
-	<form ng-submit="addComment()">
-		<textarea cols='60' placeholder="Add new comment" ng-model="body"></textarea>
-		<br>
-		<button type="submit" class="btn btn-primary">Post Comment</button>
-	</form>
-</div>
-
-<br>
-
-<div ng-repeat="comment in flavor.comments | orderBy:'date': true">
-	<br>
-	<img class="profilePic" ng-src="{{comment.user.profilepicture}}" ng-hide='!comment.user.profilepicture' alt='{{comment.user.profilepicture}}'/>
-	<span><a href='/#/profile/{{comment.user._id}}'>{{comment.user.username}}</a> </span>
-	<span>
-		{{comment.date| date: 'MMM dd, yyyy HH:mm'}}
-	</span>
-	<br>
-	<div class="commentBody">
-		<span>{{comment.body}}</span>
-		<br>
-		<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span>
-		{{comment.upvotes}} 
-	</div>
-</div>
-
+<div ng-include src="'views/_partials/_comments.html'"></div>

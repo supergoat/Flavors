@@ -1,13 +1,11 @@
 (function(){
 	angular.module('ProfileCtrl', []).controller('ProfileController', 
 		['$scope', 'auth', 'currentUserFactory', 'fileUploadFactory', 'flavorsFactory', 'friendsFactory', function($scope, auth, currentUserFactory, fileUploadFactory, flavorsFactory, friendsFactory) {
-
-  		$scope.isLoggedIn = auth.isLoggedIn
+      $scope.isLoggedIn = auth.isLoggedIn;
   		$scope.user = currentUserFactory.user;
       $scope.flavors = flavorsFactory.flavors;
       $scope.friends = friendsFactory.friends;
-
-      var currentUserId = auth.currentUserId();
+      $scope.flavorShowComments = 1;
 
   		$scope.uploadProfile = function(){
   			fileUploadFactory.init_upload('profile_input').then(function(data){
@@ -22,29 +20,30 @@
 
       $scope.addFlavor = function(){
 
-        if(!$scope.title || $scope.title === '') { 
-          $scope.error = 'Title is required';
-            return; 
+        if(!this.title || this.title === '') { 
+          this.error = 'Title is required';
+          return; 
         } else if ($scope.temporaryPicture && $scope.temporaryPicture !== '') {
+          var title = this.title;
           fileUploadFactory.init_upload('file_input').then(function(data){
             var flavorImage = data;
-            flavorsFactory.create(currentUserId, {
-              title: $scope.title,
+            flavorsFactory.create($scope.user._id, {
+              title:  title,
               picture: flavorImage
             });
-            $scope.error = '';
-            $scope.title = '';
             $scope.temporaryPicture = '';
             flavorImage = '';
           }).catch(function(err){
             console.error('Augh, there was an error!', err.statusText);
           });
+          this.error = '';
+          this.title = '';
         } else {
-          flavorsFactory.create(currentUserId, {
-            title: $scope.title
+          flavorsFactory.create($scope.user._id, {
+            title: this.title
           });
-          $scope.error = '';
-          $scope.title = '';
+          this.error = '';
+          this.title = '';
         }
       };
 
@@ -58,14 +57,12 @@
       $scope.incrementUpvotes = function(flavor){
         flavorsFactory.upvote(flavor);
       }
-
-
-      
+   
       $scope.addComment = function(flavor){
         if(!this.body || this.body === '') {
           return; 
         }
-        flavorsFactory.addComment(currentUserId, flavor._id,{
+        flavorsFactory.addComment($scope.user._id, flavor._id,{
           body: this.body
         }).success(function(comment){
           flavor.comments.push(comment);

@@ -4,35 +4,35 @@
   			$scope.isLoggedIn = auth.isLoggedIn;
   			$scope.flavors = flavorsFactory.flavors;
   			$scope.user = currentUserFactory.user;
-  			var toggle = false;
 
   			var currentUserId = auth.currentUserId();
 
 			$scope.addFlavor = function(){
 
-	        	if(!$scope.title || $scope.title === '') { 
-					$scope.error = 'Title is required';
-						return; 
+	      if(!this.title || this.title === '') { 
+					this.error = 'Title is required';
+					return; 
 				} else if ($scope.temporaryPicture && $scope.temporaryPicture !== '') {
+					var title = this.title;
 					fileUploadFactory.init_upload('file_input').then(function(data){
-	          			var flavorImage = data;
+	          var flavorImage = data;
 						flavorsFactory.create(currentUserId, {
-							title: $scope.title,
+							title: title,
 							picture: flavorImage
 						});
-						$scope.error = '';
-						$scope.title = '';
 						$scope.temporaryPicture = '';
 						flavorImage = '';
 					}).catch(function(err){
 				   	console.error('Augh, there was an error!', err.statusText);
 					});
+					this.error = '';
+					this.title = '';
 				} else {
 					flavorsFactory.create(currentUserId, {
-						title: $scope.title
+						title: this.title
 					});
-					$scope.error = '';
-					$scope.title = '';
+					this.error = '';
+					this.title = '';
 				}
 			};
 
@@ -75,12 +75,10 @@
 
 
  			$scope.showComments = function(flavorId){
- 				if(toggle === false){
+ 				if($scope.flavorShowComments !== flavorId){
  					$scope.flavorShowComments = flavorId;
- 					toggle = true;
  				} else {
  					$scope.flavorShowComments = '';
- 					toggle = false;
  				}
  			};
 

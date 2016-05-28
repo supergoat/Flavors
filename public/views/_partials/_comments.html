@@ -1,0 +1,23 @@
+<div class="commentDiv" ng-show="flavorShowComments === 1 || flavorShowComments === flavor._id">
+	<div ng-repeat="comment in flavor.comments | orderBy:'date': true">
+		<br>
+		<img class="profilePic" ng-src="{{comment.user.profilepicture}}" ng-hide='!comment.user.profilepicture' alt='{{comment.user.profilepicture}}'/>
+		<span><a href='/#/profile/{{comment.user._id}}'>{{comment.user.username}}</a> </span>
+		<span>
+			{{comment.date| date: 'MMM dd, yyyy HH:mm'}}
+		</span>
+		<br>
+		<div class="commentBody">
+			<span>{{comment.body}}</span>
+			<br>
+			<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementCommentUpvotes(flavor, comment)"></span>
+			{{comment.upvotes}} likes
+		</div>
+	</div>
+	<div class="addCommentDiv">
+		<img class="profilePicComment" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture' alt='{{user.profilepicture}}'/>
+		<form enter-submit="addComment(flavor)">
+			<textarea class="commentBox" placeholder="Add new comment" ng-model="body"></textarea>
+		</form>
+	</div>
+</div>

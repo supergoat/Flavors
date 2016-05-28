@@ -1,0 +1,34 @@
+<div ng-repeat="flavor in flavors| orderBy:'date': true">
+	<div class="flavor">
+		<div>
+			<img class="profilePicFlavor" ng-src="{{flavor.user.profilepicture}}" ng-hide='!flavor.user.profilepicture' alt='{{flavor.user.profilepicture}}'/>
+			<span ng-show="flavor.user.username">
+				<a href='/#/profile/{{flavor.user._id}}'>{{flavor.user.username}}</a>
+			</span>
+			<br>
+			<span>
+				{{flavor.date| date: 'MMM dd, yyyy HH:mm'}}
+			</span>
+		</div>
+		<br>
+		<div class="flavorText">
+			{{flavor.title}}
+		</div>
+		<br>
+		<img click-popup="1" class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
+		<div class='upvote'>
+			<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(flavor)"></span> {{flavor.upvotes}} likes
+			<a ng-click="showComments(flavor._id)"><span>{{flavor.comments.length}} comments</span><a>
+		</div>
+
+		<div id="overlay" ng-hide="!flavorScope || flavorScope === ''">
+			<div id="popup">
+				<a click-popup>X</a>
+				<div ng-include src="'views/flavors.html'"></div>
+			</div>
+		</div>
+
+		<div ng-include src="'views/_partials/_comments.html'"></div>
+	</div>
+	<br>
+</div>

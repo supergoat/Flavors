@@ -1,0 +1,19 @@
+<div ng-show="error" class="alert alert-danger">
+	<span>{{ error }}</span>
+</div>
+
+<form class="addFlavor" ng-submit='addFlavor()'>
+	<img class="profilePicFlavor" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture' alt='{{user.profilepicture}}'/>
+	<textarea ng-model="title" placeholder='Post new Flavor'></textarea>
+	<br>
+	<a href="#" onclick="document.getElementById('file_input').click(); return false;" />
+		<div class="uploadPicture">Upload Picture</div>
+	</a>
+	<div class="btn btn-default" ng-click="removePhoto()" ng-hide='!temporaryPicture'>X</div>
+	<img class='preview' ng-src="{{temporaryPicture}}" ng-hide='!temporaryPicture'/>
+	<input type="file" id="file_input" style="visibility: hidden;" onchange="angular.element(this).scope().readURL('temporaryPicture')"/>
+	<div class="postFlavor">
+		<button class="btn btn-primary"type="submit">Post Flavor</button>
+	</div>
+</form>
+<br>

@@ -4,12 +4,14 @@ angular.module('clickPopup', []).directive('clickPopup', function(){
         link: function(scope, elem, attrs) {
             /* state can be 1 or 0 */
             elem.bind('click', function(){
-                var overlayEle = document.getElementById('overlay');
-
                 if (attrs.clickPopup) {
-                    overlayEle.style.display = 'block';
+                    scope['flavorScope'] = attrs.clickPopup;
+                    scope['flavorShowComments'] = 1;
+                    scope.$apply();
                 } else {
-                    overlayEle.style.display = 'none';
+                    scope['flavorScope'] = '';
+                    scope['flavorShowComments'] = '';
+                    scope.$apply();
                 }
             })
         }

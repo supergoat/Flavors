@@ -130,7 +130,7 @@
 
 		.state('userprofile.friends', {
 			url: '/friends',
-			templateUrl: 'views/userprofile.friends.html',
+			templateUrl: 'views/profile.friends.html',
 			controller: 'UserProfileController',
 			resolve: {
 				userPromise: ['friendsFactory', '$stateParams', function(friendsFactory, $stateParams){
@@ -141,7 +141,7 @@
 
 		.state('userprofile.flavors', {
 			url: '/flavors',
-			templateUrl: 'views/userprofile.flavors.html',
+			templateUrl: 'views/profile.flavors.html',
 			controller: 'UserProfileController'
 		})
 
