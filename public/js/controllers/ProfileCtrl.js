@@ -28,6 +28,7 @@
           fileUploadFactory.init_upload('file_input').then(function(data){
             var flavorImage = data;
             flavorsFactory.create($scope.user._id, {
+              post: false,
               title:  title,
               picture: flavorImage
             });

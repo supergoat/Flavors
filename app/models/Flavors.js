@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var FlavorSchema = new mongoose.Schema({
+  post: {type: String, default: true}, 
   title: String,
   picture: String,
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},

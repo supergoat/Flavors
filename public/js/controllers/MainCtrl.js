@@ -17,13 +17,14 @@
 					fileUploadFactory.init_upload('file_input').then(function(data){
 	          var flavorImage = data;
 						flavorsFactory.create(currentUserId, {
+							post: false,
 							title: title,
 							picture: flavorImage
 						});
 						$scope.temporaryPicture = '';
 						flavorImage = '';
 					}).catch(function(err){
-				   	console.error('Augh, there was an error!', err.statusText);
+				   		console.error('Augh, there was an error!', err.statusText);
 					});
 					this.error = '';
 					this.title = '';

@@ -1,33 +1,26 @@
-<div class="container">
-	<div class="row">
-		<div id="green">
-			<div id="image">
-				<a ng-hide='user.temporaryProfile' href= "" onclick="document.getElementById('profile_input').click(); return false;">
-					<div id="hoverpic">Change Profile</div>
-				</a>
-				<div ng-hide='!user.temporaryProfile' id="hoverpicNew" >
-					<div class='btn btn-danger'  ng-click="removePhoto()">Cancel</div>
-					<div class='btn btn-success'  ng-click="uploadProfile()">Save</div>
-				</div>
-				<a ng-href="{{user.profilepicture}}">
-					<img class="preview" src="/images/default.png" ng-hide='user.profilepicture || user.temporaryProfile'/>
-					<img class="preview" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture || user.temporaryProfile'/>
-					<img class="preview" ng-src="{{user.temporaryProfile}}" ng-hide='!user.temporaryProfile'/>		
-				</a>
-				<input type="file" id="profile_input" style="visibility: hidden;" onchange="angular.element(this).scope().readURL('temporaryProfile')"/>
-			</div>
-			<h2 id="username">{{user.username}}</h2>
+<div id="green">
+	<div id="image">
+		<a ng-hide='user.temporaryProfile' href= "" onclick="document.getElementById('profile_input').click(); return false;">
+			<div id="hoverpic">Change Profile</div>
+		</a>
+		<div ng-hide='!user.temporaryProfile' id="hoverpicNew" >
+			<div class='btn btn-danger'  ng-click="removePhoto()">Cancel</div>
+			<div class='btn btn-success'  ng-click="uploadProfile()">Save</div>
 		</div>
-		<div id="white">
-			<div class="profileNav">
-				<a ui-sref="profile.home" class="btn btn-default" role="button">Profile</a>
-				<a ui-sref="profile.flavors" class="btn btn-default" role="button">Flavors</a>
-				<a ui-sref="profile.friends" class="btn btn-default" role="button">Friends</a>
-			</div>
-		</div>
+		<a ng-href="{{user.profilepicture}}">
+			<img class="preview" src="/images/default.png" ng-hide='user.profilepicture || user.temporaryProfile'/>
+			<img class="preview" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture || user.temporaryProfile'/>
+			<img class="preview" ng-src="{{user.temporaryProfile}}" ng-hide='!user.temporaryProfile'/>		
+		</a>
+		<input type="file" id="profile_input" style="visibility: hidden;" onchange="angular.element(this).scope().readURL('temporaryProfile')"/>
 	</div>
 </div>
-<br>
+<div class="profileNav">
+	<a ui-sref="profile.home" class="btn btn-default" role="button">Profile</a>
+	<a ui-sref="profile.flavors" class="btn btn-default" role="button">Flavors</a>
+	<a ui-sref="profile.friends" class="btn btn-default" role="button">Friends</a>
+</div>
+
 <div ui-view></div>
 
 <!-- 

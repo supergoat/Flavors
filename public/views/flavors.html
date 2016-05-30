@@ -1,5 +1,27 @@
-<h3>{{flavor.title}}</h3>
-<img class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
-<br>
+<div class='flavorPopup'>
+	<div class="flavorPreview">
+		<img class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
+	</div>
+	<div class="flavorDescription">
+		<div>
+			<img class="profilePicFlavor" ng-src="{{flavor.user.profilepicture}}" ng-hide='!flavor.user.profilepicture' alt='{{flavor.user.profilepicture}}'/>
+			<span ng-show="flavor.user.username">
+				<a href='/#/profile/{{flavor.user._id}}'>{{flavor.user.username}}</a>
+			</span>
+			<br>
+			<span>
+				{{flavor.date| date: 'MMM dd, yyyy HH:mm'}}
+			</span>
+		</div>
+		<br>
+		<div class="flavorText">
+			{{flavor.title}}
+		</div>
+		<div class='upvote'>
+			<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(flavor)"></span> {{flavor.upvotes}} likes
+			<a ng-click="showComments(flavor._id)"><span>{{flavor.comments.length}} comments</span></a>
+		</div>
 
-<div ng-include src="'views/_partials/_comments.html'"></div>
+		<div ng-include src="'views/_partials/_comments.html'"></div>
+	</div>
+</div>

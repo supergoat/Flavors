@@ -235,11 +235,22 @@ module.exports = function(app) {
 
 
 /***************************** Flavors ****************************************/
-    // Retrieve all flavors
+    // Retrieve user's flavors
     app.get('/api/flavors/user/:userId', function(req, res, next){
+      var posts = req.query.posts;
       var user = req.params.userId;
+      if(posts === 'true'){
+        query = {
+          user: user
+        }
+      } else {
+        query = {
+          user: user,
+          post: posts
+        }
+      }
 
-      Flavor.find({user: user})
+      Flavor.find(query)
         .populate("user", "_id username profilepicture")
         .populate({path: "comments", populate: { path: "user", select: "_id profilepicture username" }, options: { limit: 3, sort: {_id: -1} }})
         .exec(function(err, flavors){
@@ -249,6 +260,7 @@ module.exports = function(app) {
       });
     })
 
+    // Retrieve all user's friends flavors
     app.get('/api/home/flavors/user/:user', function(req, res, next){
       var users = req.user.friends;
       users.push(req.user._id);

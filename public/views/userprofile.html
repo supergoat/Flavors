@@ -1,23 +1,18 @@
-<div class="container">
-	<div class="row">
-		<div id="green">
-			<div id="image">
-				<a ng-href="{{user.profilepicture}}">
-					<img class="preview" src="/images/default.png" ng-hide='user.profilepicture'/>
-					<img class="preview" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture'/>
-				</a>
-			</div>
-			<h2 id="username">{{user.username}}</h2>
-		</div>
-		<div id="white">
-			<div class="profileNav">
-				<a ui-sref="userprofile.home" class="btn btn-default" role="button">Profile</a>
-				<a ui-sref="userprofile.flavors" class="btn btn-default" role="button">Flavors</a>
-				<a ui-sref="userprofile.friends" class="btn btn-default" role="button">Friends</a>
-			</div>
-		</div>
+<div id="green">
+	<div id="image">
+		<a ng-href="{{user.profilepicture}}">
+			<img class="preview" src="/images/default.png" ng-hide='user.profilepicture'/>
+			<img class="preview" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture'/>
+		</a>
 	</div>
+	<h2 id="username">{{user.username}}</h2>
 </div>
+<div class="profileNav">
+	<a ui-sref="userprofile.home" class="btn btn-default" role="button">Profile</a>
+	<a ui-sref="userprofile.flavors" class="btn btn-default" role="button">Flavors</a>
+	<a ui-sref="userprofile.friends" class="btn btn-default" role="button">Friends</a>
+</div>
+
 <br>
 <div ui-view></div>
 

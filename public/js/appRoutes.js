@@ -74,8 +74,7 @@
 			templateUrl: 'views/profile.html',
 			controller: 'ProfileController',
 			resolve: {
-				userPromise: ['currentUserFactory', 'flavorsFactory', '$stateParams', function(currentUserFactory, flavorsFactory, $stateParams){
-					flavorsFactory.getUserFlavors($stateParams.userId);
+				userPromise: ['currentUserFactory', '$stateParams', function(currentUserFactory, $stateParams){
 					return currentUserFactory.getUser();
 				}]
 			}
@@ -84,13 +83,23 @@
 		.state('profile.home', {
 			url: '',
 			templateUrl: 'views/profile.home.html',
-			controller: 'ProfileController'
+			controller: 'ProfileController',
+			resolve: {
+				userPromise: ['flavorsFactory', '$stateParams', function(flavorsFactory, $stateParams){
+					flavorsFactory.getUserFlavors($stateParams.userId, true);
+				}]
+			}
 		})
 
 		.state('profile.flavors', {
 			url: '/flavors',
 			templateUrl: 'views/profile.flavors.html',
-			controller: 'ProfileController'
+			controller: 'ProfileController',
+			resolve: {
+				userPromise: ['flavorsFactory', '$stateParams', function(flavorsFactory, $stateParams){
+					flavorsFactory.getUserFlavors($stateParams.userId, false);
+				}]
+			}
 		})
 
 		.state('profile.friends', {
@@ -110,8 +119,7 @@
 			templateUrl: 'views/userprofile.html',
 			controller: 'UserProfileController',
 			resolve: {
-				userPromise: ['friendsFactory', 'flavorsFactory', '$stateParams', function(friendsFactory, flavorsFactory, $stateParams){
-					flavorsFactory.getUserFlavors($stateParams.userId);
+				userPromise: ['friendsFactory', '$stateParams', function(friendsFactory, $stateParams){
 					return friendsFactory.getUsers($stateParams.userId);
 				}]
 			},
@@ -125,7 +133,12 @@
 		.state('userprofile.home', {
 			url: '',
 			templateUrl: 'views/userprofile.home.html',
-			controller: 'UserProfileController'
+			controller: 'UserProfileController',
+			resolve: {
+				userPromise: ['flavorsFactory', '$stateParams', function(flavorsFactory, $stateParams){
+					return flavorsFactory.getUserFlavors($stateParams.userId, true);
+				}]
+			}
 		})
 
 		.state('userprofile.friends', {
@@ -142,7 +155,12 @@
 		.state('userprofile.flavors', {
 			url: '/flavors',
 			templateUrl: 'views/profile.flavors.html',
-			controller: 'UserProfileController'
+			controller: 'UserProfileController',
+			resolve: {
+				userPromise: ['flavorsFactory', '$stateParams', function(flavorsFactory, $stateParams){
+					flavorsFactory.getUserFlavors($stateParams.userId, false);
+				}]
+			}
 		})
 
 

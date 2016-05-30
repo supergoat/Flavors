@@ -1,8 +1,45 @@
+/*.outer {
+	width: 800px;
+	height: 800px;
+	background-color: blue;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.inner {
+	display: inline-block;
+	width: 90%;
+	height: 90%;
+	background-color: yellow;
+	padding-top: 5%;
+}
+
+.inner-inner {
+	display: inline-block;
+	background-color: green;
+	height: 200px;
+	width: 200px;
+}
+
+.inner-inner-inner{
+	display: inline-block;
+	width: 90%;
+	height: 90%;
+	background-color: black;
+	padding-top: 5%;
+}
+.inner-inner-inner img {
+	width: 100%;
+	height: 100%;
+	border-radius: 100%;
+}*/
+
 .navbar { background-color: rgba(34, 139, 34, 0.8); z-index: 1; }
 
 .navbar a { color: white;}
 body {
-	background-color: rgba(245,255,250, 0.8);
+	background-color: rgb(245,255,250);
 	padding-top: 70px; 
 }
 
@@ -31,24 +68,32 @@ ul.nav a:focus {
 
 .jumbotron { background-color:#00FFFF; color: #00BFFF;}
 
+/************ User Profile Styling **************/
+
 #green{
 	background-color:rgba(34, 139, 34, 0.8);
+	width: 800px;
+	margin: auto;
 	height: 200px;
 }
 
-/*#white {
-	background-color: white;
-	height: 150px;
+.profileNav {
+	padding-right: 75px;
+	background-color: #7FFFD4;
+	height: 35px;
+	width: 800px;
+	margin: auto;
+	text-align: right;
 }
-*/
+
 #image {
-	border:white solid 5px;
+	border: white solid 5px;
 	background-color: white;
 	height: 150px;
 	width: 150px;
-    position: relative;
-    left: 30px;
-    top: 70px;
+  position: relative;
+  left: 90px;
+  top: 120px;
 }
 
 #image:hover #hoverpic {
@@ -65,9 +110,9 @@ ul.nav a:focus {
 	background-color: rgba(0,0,0,0.8);
 	height: 50px;
 	width: 150px;
-    position: absolute;
-    left: -5px;
-    top: 95px;
+  position: absolute;
+  left: -5px;
+  top: 95px;
 }
 
 #hoverpicNew{
@@ -79,28 +124,100 @@ ul.nav a:focus {
 	border-left: white solid 5px;
 	height: 50px;
 	width: 150px;
-    position: absolute;
-    left: -5px;
-    top: 95px;
+  position: absolute;
+  left: -5px;
+  top: 95px;
 }
 
 .preview {
 	width: 100%;
-    height: 100%;
-    margin-bottom: 10px;
-    border-radius: 100%;
-    border: rgba(34, 139, 34, 0.8) solid 2px;
+  height: 100%;
+  margin-bottom: 10px;
+  border: rgba(34, 139, 34, 0.8) solid 2px;
 }
+
 
 #username {
-	margin-left: 200px;
+	margin: 0;
+	color: rgba(34, 139, 34, 1);
 }
 
+.userInfo {
+	padding: 5px;
+	position: absolute;
+	height: 180px;
+	width: 300px;
+	border: #7FFFD4 solid 2px;
+	border-radius: 3px;
+	display: inline-block;
+	margin-top: 40px;
+	margin-left: 10px;
+	background-color: white;
+}
+
+.flavorsPreview {
+	background-color: white;
+	padding: 5px;
+	position: absolute;
+	height: 355px;
+	width: 300px;
+	border: #7FFFD4 solid 2px;
+	border-radius: 3px;
+	display: inline-block;
+	margin-top: 240px;
+	margin-left: 10px;
+	color: rgba(34, 139, 34, 1);
+}
+
+/*********************************************/
 .inline {
 	display: inline-block;
 	margin-right: 50px;
 	margin-left: 10px;
 }
+
+/************* Flavors **********************/
+.flavor-container{
+	position: relative;
+	margin: auto;
+	width: 800px;
+}
+.flavors {
+	position: absolute;
+	left: 330px;
+	padding-top: 5px;
+	display: inline-block;
+	width: 400px;
+}
+
+.flavors .addFlavor {
+	padding: 15px;
+	border: #7FFFD4 solid 2px;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.flavors .addFlavor textarea{
+	width: 80%;
+}
+
+.flavor {
+	background-color:white;
+	border: #7FFFD4 solid 1px;
+	border-radius: 5px;
+}
+
+.previewFlavor {
+	width: 100%;
+  height: 100%;
+  margin-bottom: 10px;
+  border: rgba(0, 0, 0, 0.8) solid 2px;
+}
+
+
+/********************************************/
+
+
 
 /*profile pic that appears on comments*/
 .profilePic {
@@ -132,31 +249,19 @@ ul.nav a:focus {
 	margin-left: 30px;
 }
 
-.flavors {
-	width: 70%;
-	margin: auto;
-}
 
-.flavors .addFlavor {
-	padding: 15px;
-	border: #7FFFD4 solid 2px;
-	width: 70%;
-	margin: auto;
-	border-radius: 5px;
-	background-color: white;
-}
 
-.flavors .addFlavor textarea{
-	width: 80%;
-}
 
-.flavor {
-	width: 70%;
+/************ Flavor Popup Styling *********/
+.flavorPopup {
+	width: 100%;
 	margin: auto;
 	background-color:white;
 	border: #7FFFD4 solid 1px;
 	border-radius: 5px;
 }
+
+/*******************************************/
 
 .flavorText {
 	margin-left: 10px;
@@ -201,13 +306,6 @@ ul.nav a:focus {
 }
 
 
-#white .profileNav {
-	float: right;
-	background-color: #7FFFD4;
-	height: 35px;
-	width: 100%;
-	text-align: right;
-}
 
 /************* Background Blur Effect ***************/
 .blur   {
@@ -218,7 +316,7 @@ ul.nav a:focus {
     -ms-filter: blur(5px);
 }
 
-#overlay    {
+.overlay    {
     position: fixed;
 /*    display: none;*/
     left: 0px;
@@ -229,12 +327,11 @@ ul.nav a:focus {
     z-index: 999;
 }
 
-#popup{
+.popup{
 	overflow:auto;
     position: absolute;
-    width: 90%;
+    max-width: 700px;
     height: 90%;
-    background: white; /*rgba(0,0,0, 0.8);*/
     left: 0px;
     right: 0px;
     top: 0px;
@@ -277,6 +374,58 @@ ul.img-list li:hover span.friends {
   opacity: 1;
 }
 
+/*********************************************/
+
+
+/********** Profile Preview Flavors *********/
+
+.previewFlavorPicture {
+	width: 140px;
+	height: 140px;
+	border: #7FFFD4 solid 2px;
+}
+span.smallFlavorPic span {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+ul.img-list li:hover span.smallFlavorPic {
+  opacity: 1;
+}
+
+ul.img-list #flavorLi {
+  display: inline-block;
+	width: 140px;
+	height: 140px;
+  margin: 0 0 2px 2px;
+  position: relative;
+}
+
+
+span.smallFlavorPic {
+  background: rgba(0,0,0,0.5);
+  color: white;
+  cursor: pointer;
+  display: table;
+	width: 140px;
+	height: 140px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  -webkit-transition: opacity 400ms;
+  -moz-transition: opacity 400ms;
+  -o-transition: opacity 400ms;
+  transition: opacity 400ms;
+}
+
+.previewFlavorPopup {
+	color: black;
+	text-align: left;
+}
+
+/*********************************************/
 
 
 /********* Profile Flavors Styling *********/
@@ -333,6 +482,8 @@ span.text-content {
   -o-transition: opacity 400ms;
   transition: opacity 400ms;
 }
+
+/*********************************************/
 
 .friendRequests ul.img-list li{
 	margin-bottom: -70px;

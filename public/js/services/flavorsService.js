@@ -4,11 +4,11 @@ angular.module('flavorsService', []).factory('flavorsFactory',
 			flavors: []
 		};
 
-		factory.getUserFlavors = function(userId){
+		factory.getUserFlavors = function(userId, posts){
 			if(userId === undefined) {
 				return;
 			}
-			return $http.get('/api/flavors/user/' + userId).success(function(data){
+			return $http.get('/api/flavors/user/' + userId + '?posts=' + posts).success(function(data){
 				angular.copy(data, factory.flavors);
 			});
 		};

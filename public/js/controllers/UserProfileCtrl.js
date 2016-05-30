@@ -6,7 +6,8 @@
   		$scope.user = friendsFactory.user;
       $scope.friends = friendsFactory.friends;
       $scope.flavors = flavorsFactory.flavors;
-
+      $scope.flavorShowComments = 1;
+      
       var currentUserId = auth.currentUserId();
 
       $scope.incrementUpvotes = function(flavor){
