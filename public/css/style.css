@@ -385,7 +385,8 @@ of add new comment textearea*/
 */
 
 /* Makes background black on popup */
-.overlay    {
+.overlay {
+	display: none;
 	text-align: left;
 	color: black;
     position: fixed;

@@ -1,13 +1,12 @@
 <div class="profile-flavors">
 	<h1>Flavors</h1>
 	<br>
-	<ul class="img-list" ng-repeat="flavor in flavors| orderBy:'date': true">
-		<li ng-hide="!flavor.picture">
-			<a href="#/flavors/{{flavor._id}}">
-				<img class="user-flavor-photo" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
-				<span class="text-content user-flavor-photo"><span>{{flavor.title}}</span></span>
-			</a>
+	<ul class="img-list" ng-repeat="flavor in flavors| orderBy:'date': true | filter: false ">
+		<li click-popup="1" ng-hide="!flavor.picture">
+			<img class="user-flavor-photo" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
+			<span class="text-content user-flavor-photo"><span>{{flavor.title}}</span></span>
 		</li>
+		<div ng-include src="'views/_partials/_flavorPopup.html'"></div>
 	</ul>
 </div>
 

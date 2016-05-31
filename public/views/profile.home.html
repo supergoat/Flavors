@@ -5,7 +5,7 @@
 	<div class="flavors-preview">
 		<a ui-sref="profile.flavors"><h3>Flavors</h3></a>
 		<ul class="img-list" ng-repeat="flavor in flavors| orderBy:'date': true | filter: false |limitTo: 4">
-			<li click-popup="flavorScope" ng-hide="!flavor.picture">
+			<li click-popup="1" ng-hide="!flavor.picture">
 				<img class="flavor-preview-photo" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
 				<span class="text-content flavor-preview-photo"><span>{{flavor.title}}</span></span>
 			</li>

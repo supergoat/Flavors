@@ -1,7 +1,10 @@
 <div ng-repeat="flavor in flavors| orderBy:'date': true">
 	<div class="flavor">
 		<div>
-			<img class="flavor-profile-picture" ng-src="{{flavor.user.profilepicture}}" ng-hide='!flavor.user.profilepicture' alt='{{flavor.user.profilepicture}}'/>
+			<img class="flavor-profile-picture" 
+				ng-src="{{flavor.user.profilepicture}}" 
+				ng-hide='!flavor.user.profilepicture' 
+				alt='{{flavor.user.profilepicture}}'/>
 			<span ng-show="flavor.user.username">
 				<a href='/#/profile/{{flavor.user._id}}'>{{flavor.user.username}}</a>
 			</span>
@@ -16,7 +19,7 @@
 		</div>
 		<br>
 		<div class="flavor-photo-container">
-			<img click-popup="flavorScope" class="flavor-photo" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
+			<img click-popup="1" class="flavor-photo" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
 		</div>
 		<div class='like-bar'>
 			<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(flavor)"></span> {{flavor.upvotes}} likes
