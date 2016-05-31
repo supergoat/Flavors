@@ -1,84 +1,66 @@
-/*.outer {
-	width: 800px;
-	height: 800px;
-	background-color: blue;
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;
-}
+/********************************************* GENERAL *********************************************/
 
-.inner {
-	display: inline-block;
-	width: 90%;
-	height: 90%;
-	background-color: yellow;
-	padding-top: 5%;
-}
-
-.inner-inner {
-	display: inline-block;
-	background-color: green;
-	height: 200px;
-	width: 200px;
-}
-
-.inner-inner-inner{
-	display: inline-block;
-	width: 90%;
-	height: 90%;
-	background-color: black;
-	padding-top: 5%;
-}
-.inner-inner-inner img {
-	width: 100%;
-	height: 100%;
-	border-radius: 100%;
-}*/
-
+/* Make navbar look green, and give a z-index of 1, so it goes to the background when there is a popup*/
 .navbar { background-color: rgba(34, 139, 34, 0.8); z-index: 1; }
 
+/* Make navbar links white*/
 .navbar a { color: white;}
-body {
-	background-color: rgb(245,255,250);
-	padding-top: 70px; 
-}
 
-body a { color: #00BFFF; }
+/* Give body a padding-top so it doesn't hide behind the navbar, and change the background color */
+body { background-color: rgb(245,255,250); padding-top: 70px; color: black; }
+
+/* Make all nav links appear black*/
+body a { color: black; }
+body a:hover { color: black; }
 
 /*prevent nav wrapping*/
 ul.nav li { display: inline-block;}
 
-ul.nav a:hover { background-color: #fff; color: black;!important; border-radius: 5px;}
 
-ul.nav a:focus {
-	background-color: #fff; color: black;!important; border-radius: 5px;
-}
+/* Give nav links a white background on hover and when selected */
+ul.nav a:hover { background-color: #fff; color: black !important; border-radius: 5px;}
+ul.nav a:focus { background-color: #fff; color: black !important; border-radius: 5px; }
 
-.navbar-brand:hover {
-	color: white;!important; border-radius: 5px;
-}
-.navbar-brand:focus {
-	color: white;!important; border-radius: 5px;
-}
+/* Make the brand name white at all times*/
+.navbar-brand:hover { color: white;!important; border-radius: 5px; }
+.navbar-brand:focus { color: white;!important; border-radius: 5px; }
 
 /* prevent nav links from being right at the edge*/
-.navbar .nav.pull-right {
-    margin-right: 10px; /*set margin this way in your custom styesheet*/
+.navbar .nav.pull-right { margin-right: 10px; }
+
+/* Make jumbotron green */
+.jumbotron { background-color: rgba(34, 139, 34, 0.8); }
+
+
+/********************************************* Find Friends *********************************************/
+
+/*.friendRequests ul.img-list li{
+	margin-bottom: -70px;
 }
 
-.jumbotron { background-color:#00FFFF; color: #00BFFF;}
+.findFriends {
+	clear: left;
+}
 
-/************ User Profile Styling **************/
+.findFriends ul.img-list li{
+	margin-bottom: -70px;
+}
+*/
 
-#green{
+
+/********************************************* User Profile *********************************************/
+
+/**************** User General Styling ****************/
+
+.user-main {
 	background-color:rgba(34, 139, 34, 0.8);
 	width: 800px;
 	margin: auto;
 	height: 200px;
 }
 
-.profileNav {
-	padding-right: 75px;
+.profile-nav {
+	padding-right: 100px;
 	background-color: #7FFFD4;
 	height: 35px;
 	width: 800px;
@@ -86,7 +68,7 @@ ul.nav a:focus {
 	text-align: right;
 }
 
-#image {
+.profile-picture-container {
 	border: white solid 5px;
 	background-color: white;
 	height: 150px;
@@ -96,11 +78,9 @@ ul.nav a:focus {
   top: 120px;
 }
 
-#image:hover #hoverpic {
-	display: block;
-}
-
-#hoverpic{
+/* Displays a little black box, that you
+can click to change profile-picture */
+.change-profile-picture{
 	text-align: center;
 	color: rgba(255,255,255,0.6);
 	display: none;
@@ -115,7 +95,11 @@ ul.nav a:focus {
   top: 95px;
 }
 
-#hoverpicNew{
+.profile-picture-container:hover .change-profile-picture {
+	display: block;
+}
+
+.change-profile-picture-options{
 	display: block;
 	text-align: center;
 	color: rgba(255,255,255,0.6);
@@ -129,7 +113,8 @@ ul.nav a:focus {
   top: 95px;
 }
 
-.preview {
+/* Makes profile picture fit into its container*/
+.profile-picture {
 	width: 100%;
   height: 100%;
   margin-bottom: 10px;
@@ -137,106 +122,132 @@ ul.nav a:focus {
 }
 
 
-#username {
-	margin: 0;
-	color: rgba(34, 139, 34, 1);
+/**************** User Profile Home ****************/
+
+/* Container for profile home */
+.profile-home{
+	position: relative;
+	margin: auto;
+	width: 800px;
+	height: 100px;
 }
 
-.userInfo {
+
+/* User info styling */
+.user-info {
+	top: 40px;
+	left: 10px;
 	padding: 5px;
-	position: absolute;
-	height: 180px;
+	position: relative;
 	width: 300px;
 	border: #7FFFD4 solid 2px;
 	border-radius: 3px;
-	display: inline-block;
-	margin-top: 40px;
-	margin-left: 10px;
 	background-color: white;
 }
 
-.flavorsPreview {
+/* Preview flavors styling */
+.flavors-preview {
+	top: 50px;
+	left: 10px;
+	position: relative;
 	background-color: white;
 	padding: 5px;
-	position: absolute;
 	height: 355px;
 	width: 300px;
 	border: #7FFFD4 solid 2px;
 	border-radius: 3px;
-	display: inline-block;
-	margin-top: 240px;
-	margin-left: 10px;
 	color: rgba(34, 139, 34, 1);
 }
 
-/*********************************************/
-.inline {
-	display: inline-block;
-	margin-right: 50px;
-	margin-left: 10px;
+/* Preview flavors, flavor photo*/
+.flavor-preview-photo {
+	width: 140px;
+	height: 140px;
+	border: #7FFFD4 solid 2px;
 }
 
-/************* Flavors **********************/
-.flavor-container{
+/* Adjusts the position of photos in flavors preview */
+.flavors-preview ul li {
+	width: 140px !important;
+	height: 140px !important;
+  margin: 0 0 2px 2px !important;
+}
+
+
+/* Position flavor posts to the right of user-info */
+.profile-flavor-posts {
+	left: 320px;
+	top:-410px;
+	position: relative;
+	width: 385px;
+}
+
+
+/********* User Profile Friends *********/
+
+/* Container for profile friends */
+.profile-friends {
 	position: relative;
 	margin: auto;
 	width: 800px;
+	height: 100px;
 }
+
+.profile-friends ul.img-list li{
+	margin-bottom: -70px;
+}
+
+/* Friend profile pic */
+.friend-profile-picture {
+	width: 200px;
+	height: 200px;
+	border-radius: 100%;
+	border: rgba(34, 139, 34, 0.8) solid 2px;
+}
+
+/* Appears when you hover over friends */
+span.friend-profile-picture  {
+	left: 50px !important;
+  line-height: 50px;
+}
+
+/********** User Profile Flavors *********/
+
+/* Container of profile flavors */
+.profile-flavors {
+	position: relative;
+	margin: auto;
+	width: 800px;
+	height: 100px;
+}
+
+.user-flavor-photo {
+	width: 300px;
+	height: 300px;
+}
+
+
+/********************************************* General *********************************************/
+
+/************* Flavors **********************/
+
+/* Position flavor posts in the middle of screen on home*/
 .flavors {
-	position: absolute;
-	left: 330px;
-	padding-top: 5px;
-	display: inline-block;
-	width: 400px;
+	position: relative;
+	width: 385px;
+	margin: auto;
 }
 
-.flavors .addFlavor {
-	padding: 15px;
-	border: #7FFFD4 solid 2px;
-	border-radius: 5px;
-	background-color: white;
-}
-
-.flavors .addFlavor textarea{
-	width: 80%;
-}
-
+/* Individual flavor styling*/
 .flavor {
 	background-color:white;
 	border: #7FFFD4 solid 1px;
 	border-radius: 5px;
 }
 
-.previewFlavor {
-	width: 100%;
-  height: 100%;
-  margin-bottom: 10px;
-  border: rgba(0, 0, 0, 0.8) solid 2px;
-}
-
-
-/********************************************/
-
-
-
-/*profile pic that appears on comments*/
-.profilePic {
-	width: 25px;
-	height: 25px;
-	border-radius: 100%;
-	border: rgba(34, 139, 34, 0.8) solid 2px;
-}
-
-.profilePicComment{
-	border: rgba(34, 139, 34, 0.8) solid 2px;
-	margin-right: 5px;
-	width: 25px;
-	height: 25px;
-	border-radius: 100%;
- 	float: left;
-}
-
-.profilePicFlavor {
+/* Profile picture that appears next to users flavor
+as well as add new flavor */
+.flavor-profile-picture {
 	float: left;
 	width: 50px;
 	height: 50px;
@@ -245,15 +256,110 @@ ul.nav a:focus {
 	margin: 5px;
 }
 
-.commentBody {
+/* Styling of how like-bar looks */
+.like-bar {
+	margin-right: 10px;
+	margin-left: 10px;
+	border-top: #7FFFD4 solid 1px;
+}
+
+.flavor-photo-container {
+	padding: 10px;
+}
+
+.flavor-photo {
+	width: 100%;
+	border: #7FFFD4 solid 1px;
+}
+
+.flavor-title {
+	padding: 10px;
+}
+
+/************* Add Flavors **********************/
+
+/*Where button to upload photo appears*/
+.upload-photo{ margin-left: 50px; }
+
+/* Adjusts the position of the post flavor button*/
+.post-flavor-button {
+	margin-left: 50px;
+	width: 80%;
+	text-align: right;
+	margin-top: -20px;
+}
+
+/* Add flavor styling */
+.add-flavor {
+	padding: 15px;
+	border: #7FFFD4 solid 2px;
+	border-radius: 5px;
+	background-color: white;
+}
+/*Adjusts the width of the comment text area*/
+.add-flavor textarea{
+	width: 80%;
+}
+
+/* Styling for previewing picture selected for upload*/
+.preview-flavor-picture {
+	width: 100%;
+  height: 100%;
+  margin-bottom: 10px;
+  border: rgba(0, 0, 0, 0.8) solid 2px;
+}
+
+/************* Flavor Comments Styling **********************/
+
+/* profile pic that appears on comments*/
+.comments-profile-picture {
+	width: 25px;
+	height: 25px;
+	border-radius: 100%;
+	border: rgba(34, 139, 34, 0.8) solid 2px;
+}
+
+/* Current user's profile picture that goes
+next to add new comment */
+.current-user-comment-profile-picture{
+	border: rgba(34, 139, 34, 0.8) solid 2px;
+	margin-right: 5px;
+	width: 25px;
+	height: 25px;
+	border-radius: 100%;
+ 	float: left;
+}
+
+/* makes comments appear 30px to the right */
+.comment-body {
 	margin-left: 30px;
 }
 
 
+/* Adjusts the width and height 
+of add new comment textearea*/
+.add-Comment textarea {
+	width: 90%;
+	height: 30px;
+}
+
+/* Container of flavor comments */
+.comment-container {
+	border-top: #7FFFD4 solid 1px;
+	background-color: rgba(211,211,211, 0.2);
+	padding: 10px;
+}
+
+.add-comment {
+	padding-top: 5px;
+}
+
 
 
 /************ Flavor Popup Styling *********/
-.flavorPopup {
+
+/*Flavor popup design */
+.flavor-popup {
 	width: 100%;
 	margin: auto;
 	background-color:white;
@@ -261,64 +367,28 @@ ul.nav a:focus {
 	border-radius: 5px;
 }
 
-/*******************************************/
-
-.flavorText {
+/*Flavor popup comments */
+.flavor-popup-title {
 	margin-left: 10px;
 	margin-bottom: 5px;
 }
 
-.uploadPicture{
-	margin-left: 50px;
-}
-
-.postFlavor {
-	margin-left: 50px;
-	width: 80%;
-	text-align: right;
-	margin-top: -20px;
-}
-
-.upvote {
-	margin-right: 10px;
-	margin-left: 10px;
-	border-top: #7FFFD4 solid 1px;
-}
-
-.flavorPicture {
-	width: 100%;
-	padding: 10px;
-}
-
-.commentBox {
-	width: 90%;
-	height: 30px;
-}
-
-.commentDiv {
-	border-top: #7FFFD4 solid 1px;
-	background-color: rgba(211,211,211, 0.2);
-	padding: 10px;
-}
-
-.addCommentDiv {
-	padding-top: 5px;
-}
-
-
 
 /************* Background Blur Effect ***************/
-.blur   {
+/*.blur   {
     filter: blur(5px);
     -webkit-filter: blur(5px);
     -moz-filter: blur(5px);
     -o-filter: blur(5px);
     -ms-filter: blur(5px);
 }
+*/
 
+/* Makes background black on popup */
 .overlay    {
+	text-align: left;
+	color: black;
     position: fixed;
-/*    display: none;*/
     left: 0px;
     top: 0px;
     right: 0px;
@@ -327,7 +397,8 @@ ul.nav a:focus {
     z-index: 999;
 }
 
-.popup{
+/* Popup container*/
+.popup {
 	overflow:auto;
     position: absolute;
     max-width: 700px;
@@ -339,106 +410,16 @@ ul.nav a:focus {
     margin: auto;	
 }
 
-
-/********* Profile Friends Styling *********/
-.friendPic{
-	width: 200px;
-	height: 200px;
-	border-radius: 100%;
-	border: rgba(34, 139, 34, 0.8) solid 2px;
-}
-
-span.friends {
-  background: rgba(0,0,0,0.5);
-  color: white;
-  cursor: pointer;
-  display: table;
-  height: 200px;
-  left: 50px;
-  position: absolute;
-  top: 0;
-  width: 200px;
-  border-radius: 100%;
-  opacity: 0;
-  text-align: center;
-  /*Center text in image*/
-  padding-top: 50px;
-  line-height: 50px;
-  -webkit-transition: opacity 400ms;
-  -moz-transition: opacity 400ms;
-  -o-transition: opacity 400ms;
-  transition: opacity 400ms;
-}
-
-ul.img-list li:hover span.friends {
-  opacity: 1;
-}
-
-/*********************************************/
-
-
-/********** Profile Preview Flavors *********/
-
-.previewFlavorPicture {
-	width: 140px;
-	height: 140px;
-	border: #7FFFD4 solid 2px;
-}
-span.smallFlavorPic span {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-}
-
-ul.img-list li:hover span.smallFlavorPic {
-  opacity: 1;
-}
-
-ul.img-list #flavorLi {
-  display: inline-block;
-	width: 140px;
-	height: 140px;
-  margin: 0 0 2px 2px;
-  position: relative;
+/* Change color of close button so its visible */
+.close-popup {
+	color: white;
 }
 
 
-span.smallFlavorPic {
-  background: rgba(0,0,0,0.5);
-  color: white;
-  cursor: pointer;
-  display: table;
-	width: 140px;
-	height: 140px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  opacity: 0;
-  -webkit-transition: opacity 400ms;
-  -moz-transition: opacity 400ms;
-  -o-transition: opacity 400ms;
-  transition: opacity 400ms;
-}
 
-.previewFlavorPopup {
-	color: black;
-	text-align: left;
-}
+/************* Backbone of image hover ***************/
 
-/*********************************************/
-
-
-/********* Profile Flavors Styling *********/
-
-.userFlavorPicture {
-	width: 300px;
-	height: 300px;
-}
-
-.userFlavors {
-	padding-left: 4%;
-}
-
+/* Removes standard styling of lists*/
 ul.img-list {
   list-style: none;
   margin: 0;
@@ -447,6 +428,7 @@ ul.img-list {
   text-align: center;
 }
 
+/* Sets the positioning of li items*/
 ul.img-list li {
   display: inline-block;
   height: 300px;
@@ -455,27 +437,27 @@ ul.img-list li {
   width: 300px;
 }
 
+/* Centers text appearing when hovering over a photo */
 span.text-content span {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
 }
 
+/* Displays text when hovering over a photo */
 ul.img-list li:hover span.text-content {
   opacity: 1;
 }
 
-
+/* What appears when you hover on an photo */
 span.text-content {
+	top: 0;
+	left: 0;
   background: rgba(0,0,0,0.5);
   color: white;
   cursor: pointer;
   display: table;
-  height: 300px;
-  left: 0;
   position: absolute;
-  top: 0;
-  width: 300px;
   opacity: 0;
   -webkit-transition: opacity 400ms;
   -moz-transition: opacity 400ms;
@@ -483,27 +465,6 @@ span.text-content {
   transition: opacity 400ms;
 }
 
-/*********************************************/
-
-.friendRequests ul.img-list li{
-	margin-bottom: -70px;
-}
-
-.findFriends {
-	clear: left;
-}
-
-.findFriends ul.img-list li{
-	margin-bottom: -70px;
-}
-
-.allFriends {
-	clear: left;
-}
-
-.allFriends ul.img-list li{
-	margin-bottom: -70px;
-}
 
 
 

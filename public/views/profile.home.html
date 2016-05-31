@@ -1,20 +1,18 @@
-<div class="flavor-container">
-	<div class="userInfo">
-		<h2 id="username">{{user.username}}</h2>
+<div class="profile-home">
+	<div class="user-info">
+		<h3>{{user.username}}</h3>
 	</div>
-	<div class="flavorsPreview">
+	<div class="flavors-preview">
 		<a ui-sref="profile.flavors"><h3>Flavors</h3></a>
 		<ul class="img-list" ng-repeat="flavor in flavors| orderBy:'date': true | filter: false |limitTo: 4">
-			<li click-popup="flavorScope" id='flavorLi' ng-hide="!flavor.picture">
-				<img class="previewFlavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
-				<span class="smallFlavorPic"><span>{{flavor.title}}</span></span>
+			<li click-popup="flavorScope" ng-hide="!flavor.picture">
+				<img class="flavor-preview-photo" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
+				<span class="text-content flavor-preview-photo"><span>{{flavor.title}}</span></span>
 			</li>
-			<div class="previewFlavorPopup">
-				<div ng-include src="'views/_partials/_flavorPopup.html'"></div>
-			</div>
+			<div ng-include src="'views/_partials/_flavorPopup.html'"></div>
 		</ul>	
 	</div>
-	<div class='flavors'>
+	<div class='profile-flavor-posts'>
 		<div ng-show="isLoggedIn()">
 			<div ng-include src="'views/_partials/_addFlavor.html'"></div>
 			<div ng-include src="'views/_partials/_flavors.html'"></div>

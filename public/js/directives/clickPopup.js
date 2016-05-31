@@ -4,8 +4,8 @@ angular.module('clickPopup', []).directive('clickPopup', function(){
         link: function(scope, elem, attrs) {
             /* state can be 1 or 0 */
             elem.bind('click', function(){
-                document.body.style.overflow = "hidden";
                 if (scope[attrs.clickPopup] !== 1) {
+                    document.body.style.overflow = "hidden";
                     scope[attrs.clickPopup] = 1;
                     scope['flavorShowComments'] = 1;
                     scope.$apply();

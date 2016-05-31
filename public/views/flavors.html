@@ -1,10 +1,10 @@
-<div class='flavorPopup'>
-	<div class="flavorPreview">
-		<img class="flavorPicture" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
-	</div>
-	<div class="flavorDescription">
+<div class='flavor-popup'>
+	<div class="flavor">
+		<div class="flavor-photo-container">
+			<img class="flavor-photo" ng-src="{{flavor.picture}}" ng-hide='!flavor.picture' alt='{{flavor.picture}}'/>
+		</div>
 		<div>
-			<img class="profilePicFlavor" ng-src="{{flavor.user.profilepicture}}" ng-hide='!flavor.user.profilepicture' alt='{{flavor.user.profilepicture}}'/>
+			<img class="flavor-profile-picture" ng-src="{{flavor.user.profilepicture}}" ng-hide='!flavor.user.profilepicture' alt='{{flavor.user.profilepicture}}'/>
 			<span ng-show="flavor.user.username">
 				<a href='/#/profile/{{flavor.user._id}}'>{{flavor.user.username}}</a>
 			</span>
@@ -14,14 +14,15 @@
 			</span>
 		</div>
 		<br>
-		<div class="flavorText">
+		<div class="flavor-popup-title">
 			{{flavor.title}}
 		</div>
-		<div class='upvote'>
+		<div class='like-bar'>
 			<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(flavor)"></span> {{flavor.upvotes}} likes
 			<a ng-click="showComments(flavor._id)"><span>{{flavor.comments.length}} comments</span></a>
 		</div>
 
 		<div ng-include src="'views/_partials/_comments.html'"></div>
 	</div>
+
 </div>

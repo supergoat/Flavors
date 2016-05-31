@@ -1,19 +1,12 @@
-<div class="container">
-	<div class="allFriends">
-		<h1>Friends</h1>
-		<br>
-		<ul class="img-list" ng-repeat="friend in friends">
-			<li>
-				<img class="friendPic" ng-src="{{friend.profilepicture}}" ng-hide='!friend.profilepicture' alt='{{friend.username}}'/>
-				<span style="padding-top: 75px;" class="friends">
-					<a class="btn btn-default" href="#/profile/{{friend._id}}">{{friend.username}}</a>
-				</span>
-<!-- 				<span class="friends" ng-hide="template == profile">
-					<a class="btn btn-default" href="#/profile/{{friend._id}}">{{friend.username}}</a>
-					<br>
-					<a class="btn btn-danger" ng-click="friendsList.deleteFriend(friend._id)">Delete</a>
-				</span> -->
-			</li>
-		</ul>
-	</div>
+<div class="profile-friends">
+	<br>
+	<h1>Friends</h1>
+	<ul class="img-list" ng-repeat="friend in friends">
+		<li>
+			<img class="friend-profile-picture" ng-src="{{friend.profilepicture}}" ng-hide='!friend.profilepicture' alt='{{friend.username}}'/>
+			<span style="padding-top: 75px;" class="text-content friend-profile-picture">
+				<a class="btn btn-default" href="#/profile/{{friend._id}}">{{friend.username}}</a>
+			</span>
+		</li>
+	</ul>
 </div>
