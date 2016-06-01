@@ -14,7 +14,7 @@
 	</div>
 	<div class='profile-flavor-posts'>
 		<div ng-show="isLoggedIn()">
-			<div ng-include src="'views/_partials/_addFlavor.html'"></div>
+			<div ng-hide="state !== 'profile'" ng-include src="'views/_partials/_addFlavor.html'"></div>
 			<div ng-include src="'views/_partials/_flavors.html'"></div>
 		</div>
 	</div>

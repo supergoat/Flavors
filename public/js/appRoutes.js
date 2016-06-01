@@ -56,6 +56,7 @@
 			resolve: {
 				friendsPromise: ['friendsFactory', function(friendsFactory){
 					friendsFactory.getUsers(undefined);
+					friendsFactory.getFriends(undefined);
 					return friendsFactory.getFriendRequests();
 				}]
 			}
@@ -109,7 +110,7 @@
 		.state('userprofile', {
 			abstract: true,
 			url: '/profile/:userId',
-			templateUrl: 'views/userprofile.html',
+			templateUrl: 'views/profile.html',
 			controller: 'UserProfileController',
 			resolve: {
 				userPromise: ['friendsFactory', '$stateParams', function(friendsFactory, $stateParams){
@@ -125,7 +126,7 @@
 
 		.state('userprofile.home', {
 			url: '',
-			templateUrl: 'views/userprofile.home.html',
+			templateUrl: 'views/profile.home.html',
 			controller: 'UserProfileController',
 			resolve: {
 				userPromise: ['flavorsFactory', '$stateParams', function(flavorsFactory, $stateParams){

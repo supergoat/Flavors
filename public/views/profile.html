@@ -1,6 +1,6 @@
 <div class="user-main">
 	<div class="profile-picture-container">
-		<a ng-hide='user.temporaryProfile' href= "" onclick="document.getElementById('profile_input').click(); return false;">
+		<a ng-hide="user.temporaryProfile || state !== 'profile'" href= "" onclick="document.getElementById('profile_input').click(); return false;">
 			<div class="change-profile-picture">Change Profile</div>
 		</a>
 		<div ng-hide='!user.temporaryProfile' class="change-profile-picture-options" >
@@ -8,29 +8,25 @@
 			<div class='btn btn-success'  ng-click="uploadProfile()">Save</div>
 		</div>
 		<a ng-href="{{user.profilepicture}}">
-			<img class="profile-picture" src="/images/default.png" ng-hide='user.profilepicture || user.temporaryProfile'/>
-			<img class="profile-picture" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture || user.temporaryProfile'/>
+			<img class="profile-picture" ng-src="{{user.profilepicture}}" ng-hide='user.temporaryProfile'/>
 			<img class="profile-picture" ng-src="{{user.temporaryProfile}}" ng-hide='!user.temporaryProfile'/>		
 		</a>
-		<input type="file" id="profile_input" style="visibility: hidden;" onchange="angular.element(this).scope().readURL('temporaryProfile')"/>
+		<input ng-hide="state !== 'profile'" type="file" id="profile_input" style="visibility: hidden;" onchange="angular.element(this).scope().readURL('temporaryProfile')"/>
 	</div>
 </div>
-<div class="profile-nav">
+
+<!-- profile -->
+<div ng-hide="state !== 'profile' || state ==='userprofile'" class="profile-nav">
 	<a ui-sref="profile.home" class="btn btn-default" role="button">Profile</a>
 	<a ui-sref="profile.flavors" class="btn btn-default" role="button">Flavors</a>
 	<a ui-sref="profile.friends" class="btn btn-default" role="button">Friends</a>
 </div>
 
+<!-- user profile -->
+<div ng-hide="state === 'profile' || state !== 'userprofile'" class="profile-nav">
+	<a ui-sref="userprofile.home" class="btn btn-default" role="button">Profile</a>
+	<a ui-sref="userprofile.flavors" class="btn btn-default" role="button">Flavors</a>
+	<a ui-sref="userprofile.friends" class="btn btn-default" role="button">Friends</a>
+</div>
+
 <div ui-view></div>
-
-<!-- 
-<a href="javascript:myBlurFunction(1);" />
-<div id="overlay">
-	<div id="popup">
-		<a href="javascript:myBlurFunction(0);">hide</a>
-		<br>
-		<a href= "#" onclick="document.getElementById('file_input').click(); return false;">Select Picture</a>
-	</div>
-</div> -->
-
-

@@ -7,6 +7,7 @@
       $scope.friends = friendsFactory.friends;
       $scope.flavors = flavorsFactory.flavors;
       $scope.flavorShowComments = 1;
+      $scope.state = 'userprofile';
       
       var currentUserId = auth.currentUserId();
 

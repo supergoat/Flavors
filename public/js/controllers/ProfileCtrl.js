@@ -6,6 +6,7 @@
       $scope.flavors = flavorsFactory.flavors;
       $scope.friends = friendsFactory.friends;
       $scope.flavorShowComments = 1;
+      $scope.state = 'profile';
 
   		$scope.uploadProfile = function(){
   			fileUploadFactory.init_upload('profile_input').then(function(data){

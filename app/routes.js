@@ -156,7 +156,7 @@ module.exports = function(app) {
     app.post('/api/users/accept-friend-request', auth, function(req, res, next){
       var currentUserId = req.payload._id;
       var userId = req.body.userId;
-    
+      console.log(userId);
       // find friend and add currentUser to friends and remove it from requestsSend
       User
        .findOne({"_id": userId, "friends": { $ne: currentUserId }, "requestsSend": currentUserId }, function(err, user){

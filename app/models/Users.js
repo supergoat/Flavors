@@ -8,7 +8,7 @@ var UserSchema = new mongoose.Schema({
 	username: { type: String, lowercase: true, unique: true},
 	hash: String,
 	salt: String,
-  profilepicture: String,
+  profilepicture: {type: String, default: 'https://dendrotest.s3.amazonaws.com/default.png'},
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   flavors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Flavor' }],
   pendingRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
