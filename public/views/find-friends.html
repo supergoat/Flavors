@@ -1,46 +1,28 @@
-<div class="container">
-	<div class="friendRequests">
-		<h1>Friend Requests</h1>
-		<br>
-		<ul class="img-list" ng-repeat="friendRequest in friendsList.friendRequests">
-			<li>
-				<img class="friend-profile-picture" ng-src="{{friendRequest.profilepicture}}" ng-hide='!friendRequest.profilepicture' alt='{{friendRequest.username}}'/>
-				<span class="friends">
-					<a class="btn btn-default" href="#/profile/{{friendRequest._id}}">{{friendRequest.username}}</a>
-					<br>
-					<a class="btn btn-success" ng-click="friendsList.acceptFriendRequest(friendRequest._id)">Accept</a>
-				</span>
+<div class="profile-friends">
+	<br>
 
-			</li>
-		</ul>
-	</div>
-	<div class="findFriends">
-		<h1>Find Friends</h1>
-		<br>
-		<ul class="img-list" ng-repeat="user in friendsList.users">
-			<li ng-hide="friendsList.haveRequest(user._id) || friendsList.isFriend(user._id)">
-				<img class="friend-profile-picture" ng-src="{{user.profilepicture}}" ng-hide='!user.profilepicture' alt='{{user.username}}'/>
-				<span class="friends">
-					<a class="btn btn-default" href="#/profile/{{user._id}}">{{user.username}}</a>
-					<br>
-					<a class="btn btn-primary" ng-click="friendsList.sendFriendRequest(user._id)" ng-hide="friendsList.isPending(user.pendingRequests) || friendsList.haveRequest(user._id)">Add Friend</a>
-					<a class="btn btn-danger" ng-click="friendsList.cancelFriendRequest(user._id)" ng-show="friendsList.isPending(user.pendingRequests)">
-						Cancel Request
-					</a>
-				</span>
-			</li>
-		</ul>
-	</div>
-	<div class="allFriends">
-		<h1>Friends</h1>
-		<br>
-		<ul class="img-list" ng-repeat="friend in friendsList.friends">
+	<div id="friend-requests" ng-hide="friendsList.friendRequests.length === 0">
+		<h2>Friend Requests</h2>
+		<ul class="img-list" ng-repeat="friend in friendsList.friendRequests">
 			<li>
 				<img class="friend-profile-picture" ng-src="{{friend.profilepicture}}" ng-hide='!friend.profilepicture' alt='{{friend.username}}'/>
-				<span class="friends">
+				<span style="padding-top: 75px;" class="text-content friend-profile-picture">
 					<a class="btn btn-default" href="#/profile/{{friend._id}}">{{friend.username}}</a>
-					<br>
-					<a class="btn btn-danger" ng-click="friendsList.deleteFriend(friend._id)">Delete</a>
+					<a class="btn btn-success" ng-click="friendsList.acceptFriendRequest(friend._id)">Accept</a>
+				</span>
+			</li>
+		</ul>
+	</div>
+
+	<div id="find-friends">
+		<h2>Find Friends</h2>
+		<ul class="img-list" ng-repeat="friend in friendsList.users">
+			<li ng-hide="friendsList.haveRequest(friend._id) || friendsList.isFriend(friend._id)">
+				<img class="friend-profile-picture" ng-src="{{friend.profilepicture}}" ng-hide='!friend.profilepicture' alt='{{friend.username}}'/>
+				<span style="padding-top: 75px;" class="text-content friend-profile-picture">
+					<a class="btn btn-default" href="#/profile/{{friend._id}}">{{friend.username}}</a>
+					<a class="btn btn-primary" ng-click="friendsList.sendFriendRequest(friend._id)" ng-hide="friendsList.isPending(friend.pendingRequests) || friendsList.haveRequest(friend._id)">Add Friend</a>
+					<a class="btn btn-danger" ng-click="friendsList.cancelFriendRequest(friend._id)" ng-show="friendsList.isPending(friend.pendingRequests)">Cancel Request</a>
 				</span>
 			</li>
 		</ul>

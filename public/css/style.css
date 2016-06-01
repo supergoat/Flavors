@@ -34,18 +34,15 @@ ul.nav a:focus { background-color: #fff; color: black !important; border-radius:
 
 /********************************************* Find Friends *********************************************/
 
-/*.friendRequests ul.img-list li{
-	margin-bottom: -70px;
+
+#friend-requests {
+	float: left;
 }
 
-.findFriends {
+#find-friends{
 	clear: left;
 }
 
-.findFriends ul.img-list li{
-	margin-bottom: -70px;
-}
-*/
 
 
 /********************************************* User Profile *********************************************/

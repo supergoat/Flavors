@@ -56,16 +56,9 @@
 			resolve: {
 				friendsPromise: ['friendsFactory', function(friendsFactory){
 					friendsFactory.getUsers(undefined);
-					friendsFactory.getFriends();
 					return friendsFactory.getFriendRequests();
 				}]
 			}
-		})
-
-		.state('friend-requests', {
-			url:'/friend-requests',
-			templateUrl: 'views/friend-requests.html',
-			controller: 'FindFriendsController as friendsList'
 		})
 
 		.state('profile', {
