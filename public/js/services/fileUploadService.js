@@ -30,11 +30,11 @@ angular.module('fileUploadService', []).factory('fileUploadFactory',
 		function get_signed_request(file){
 			return new Promise(function(resolve, reject) { 
 			    var xhr = new XMLHttpRequest();
-			    var token = auth.getToken();
-				var payload = JSON.parse($window.atob(token.split('.')[1]));
-			    var filename = Date.now().toString() + payload._id;
+			 //    var token = auth.getToken();
+				// var payload = JSON.parse($window.atob(token.split('.')[1]));
+			 //    var filename = Date.now().toString() + payload._id;
 
-			    xhr.open("GET", "/sign_s3?file_name="+filename+"&file_type="+file.type);
+			    xhr.open("GET", "/sign_s3?file_name="+file.name+"&file_type="+file.type);
 			    xhr.onreadystatechange = function(){
 			        if(xhr.readyState === 4){
 			            if(xhr.status === 200){
