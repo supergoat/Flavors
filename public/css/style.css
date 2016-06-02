@@ -10,8 +10,8 @@
 body { background-color: rgb(245,255,250); padding-top: 70px; color: black; }
 
 /* Make all nav links appear black*/
-body a { color: black; }
-body a:hover { color: black; }
+body a { color: lightblue; }
+body a:hover { color: lightblue; }
 
 /*prevent nav wrapping*/
 ul.nav li { display: inline-block;}

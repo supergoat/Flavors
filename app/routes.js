@@ -22,7 +22,6 @@ module.exports = function(app) {
 
     // ******* SERVER ROUTES *******
 
-
 /***************************** authentication routes ****************************************/
     app.post('/register', function(req, res, next){
       if(!req.body.username || !req.body.password){
@@ -252,7 +251,7 @@ module.exports = function(app) {
 
       Flavor.find(query)
         .populate("user", "_id username profilepicture")
-        .populate({path: "comments", populate: { path: "user", select: "_id profilepicture username" }, options: { limit: 3, sort: {_id: -1} }})
+        .populate({path: "comments", populate: { path: "user", select: "_id profilepicture username" }}) //, options: { limit: 3, sort: {_id: -1} }
         .exec(function(err, flavors){
           if(err){ return next(err); }
 
@@ -266,7 +265,7 @@ module.exports = function(app) {
       users.push(req.user._id);
       Flavor.find( {"user": { $in: users }})
         .populate("user", "_id username profilepicture")
-        .populate({path: "comments", populate: { path: "user", select: "_id profilepicture username" }, options: { limit: 3, sort: {_id: -1} }})
+        .populate({path: "comments", populate: { path: "user", select: "_id profilepicture username" }}) //, options: { limit: 3, sort: {_id: -1} }
         .exec(function(err, flavors){
           if(err){ return next(err); }
           res.json(flavors);

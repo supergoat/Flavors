@@ -1,6 +1,6 @@
 <div class="comment-container" ng-show="flavorShowComments === 1 || flavorShowComments === flavor._id">
-	<div ng-repeat="comment in flavor.comments | orderBy:'date': true">
-		<br>
+	<a>view more comments</a>
+	<div ng-repeat="comment in flavor.comments | orderBy:'-date': true">
 		<img class="comments-profile-picture" ng-src="{{comment.user.profilepicture}}" ng-hide='!comment.user.profilepicture' alt='{{comment.user.profilepicture}}'/>
 		<span><a href='/#/profile/{{comment.user._id}}'>{{comment.user.username}}</a> </span>
 		<span>
